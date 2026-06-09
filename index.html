@@ -44,12 +44,12 @@
         .card-back {
             transform: rotateY(180deg);
         }
-        /* Custom Tech Grid Pattern Background */
+        /* Custom Trivia Grid Pattern Background */
         .tech-grid {
-            background-size: 8px 8px;
+            background-size: 10px 10px;
             background-image: 
-                linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+                linear-gradient(to right, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
         }
         /* Vertical writing text styling for right ribbon */
         .vertical-text {
@@ -70,95 +70,108 @@
             animation: flashRedEffect 0.4s ease-out;
         }
         @keyframes flashRedEffect {
-            0% { background-color: rgba(239, 68, 68, 0.5); }
-            100% { background-color: rgba(239, 68, 68, 0); }
+            0% { background-color: rgba(244, 63, 94, 0.5); }
+            100% { background-color: rgba(244, 63, 94, 0); }
         }
-        /* Active Player Glows */
+        /* Active Player Glows (Playful Trivia Style) */
         .active-p1-glow {
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
-            border-color: rgba(16, 185, 129, 1);
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.7);
+            border-color: rgba(236, 72, 153, 1);
         }
         .active-p2-glow {
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
-            border-color: rgba(99, 102, 241, 1);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.7);
+            border-color: rgba(59, 130, 246, 1);
         }
         /* Custom scrollbar for eco-journal */
         ::-webkit-scrollbar {
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #f0fdf4;
+            background: #fff5f5;
         }
         ::-webkit-scrollbar-thumb {
-            background: #10b981;
+            background: #f472b6;
             border-radius: 4px;
+        }
+        /* Pulse slow animation */
+        .pulse-slow {
+            animation: pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-100 via-emerald-50 to-indigo-50 min-h-full text-slate-800 flex flex-col relative overflow-x-hidden select-none">
+<body class="bg-gradient-to-br from-rose-100 via-purple-100 to-amber-100 min-h-full text-slate-800 flex flex-col relative overflow-x-hidden select-none">
 
     <!-- Red Flash Overlay Element for Screen Shaking Danger -->
     <div id="flash-overlay" class="absolute inset-0 pointer-events-none z-50 transition-colors duration-200"></div>
 
     <!-- Top Decorative Header -->
-    <header class="bg-white/90 backdrop-blur-md border-b-2 border-emerald-100 py-3.5 px-6 sticky top-0 z-40 shadow-md">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <header class="bg-white/80 backdrop-blur-md border-b-4 border-pink-200 py-3 px-4 sm:px-6 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             <div class="flex items-center gap-3 cursor-pointer" onclick="restartToHome()">
-                <div class="bg-emerald-600 text-white p-3 rounded-2xl shadow-lg shadow-emerald-600/30 animate-bounce">
-                    <i class="fa-solid fa-recycle text-2xl"></i>
+                <div class="bg-gradient-to-tr from-pink-500 to-rose-400 text-white p-2.5 rounded-2xl shadow-lg shadow-pink-500/20 animate-bounce">
+                    <i class="fa-solid fa-star text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl sm:text-2xl font-black text-emerald-950 tracking-tight flex items-center gap-2">
+                    <h1 class="text-xl sm:text-2xl font-black bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-tight flex items-center gap-2">
                         <span>3R จับคู่กู้สิ่งแวดล้อม</span>
-                        <span class="text-[10px] font-black bg-emerald-600 text-white px-2.5 py-1 rounded-full uppercase tracking-wide">โหมดเล่นง่าย 🚀</span>
+                        <span class="text-[9px] font-black bg-yellow-400 text-amber-950 px-2.5 py-0.5 rounded-full uppercase tracking-wide shadow-sm">ฉบับมือถือสดใส 📱</span>
                     </h1>
-                    <p class="text-xs sm:text-sm font-semibold text-emerald-700">เปิดบอร์ดคู่การ์ด 3R สะสมแต้ม หลบระเบิดขยะมลพิษ และสรุปรายงานส่งคุณครูย้อนหลัง!</p>
+                    <p class="text-xs font-bold text-purple-700">บอร์ดการ์ดไซส์ใหญ่สว่างตา หลบระเบิดขยะ และดาวน์โหลดบันทึกคำตอบส่งคุณครูย้อนหลัง!</p>
                 </div>
             </div>
             
             <!-- Turn & Score Dashboard (Visible during Game) -->
-            <div id="dashboard-container" class="hidden flex-wrap items-center gap-3 bg-slate-100 p-2 rounded-2xl border-2 border-slate-200">
+            <div id="dashboard-container" class="hidden flex-wrap items-center gap-3 bg-white/90 p-1.5 rounded-2xl border-2 border-purple-200 shadow-sm">
                 <!-- Solo Stats -->
-                <div id="solo-stats" class="hidden flex items-center gap-4 px-3 py-1">
+                <div id="solo-stats" class="hidden flex items-center gap-3 px-2 py-0.5">
                     <div class="text-center">
-                        <div class="text-[10px] text-slate-500 font-bold uppercase">เวลาที่ใช้</div>
-                        <div class="text-lg font-black text-slate-800" id="live-timer">00:00</div>
+                        <div class="text-[9px] text-purple-400 font-extrabold uppercase">เวลาที่ใช้</div>
+                        <div class="text-base font-black text-purple-950" id="live-timer">00:00</div>
                     </div>
-                    <div class="h-8 w-[1.5px] bg-slate-300"></div>
+                    <div class="h-6 w-[1.5px] bg-purple-200"></div>
                     <div class="text-center">
-                        <div class="text-[10px] text-emerald-600 font-bold uppercase">คู่ที่จับได้</div>
-                        <div class="text-lg font-black text-emerald-600" id="solo-score">0 / 14</div>
+                        <div class="text-[9px] text-pink-500 font-extrabold uppercase">คู่ที่สำเร็จ</div>
+                        <div class="text-base font-black text-pink-600" id="solo-score">0 / 4</div>
                     </div>
                 </div>
 
                 <!-- Versus Turn/Score Stats -->
-                <div id="versus-stats" class="hidden flex items-center gap-2 sm:gap-4 px-1">
+                <div id="versus-stats" class="hidden flex items-center gap-2 px-1">
                     <!-- Player 1 Score badge -->
-                    <div id="p1-badge" class="bg-white border-2 border-slate-200 rounded-xl px-3 py-1.5 transition-all duration-300">
-                        <div class="text-[9px] font-black text-emerald-600 flex items-center gap-1">
-                            <i class="fa-solid fa-circle text-[7px] animate-pulse"></i> P1 (สีเขียว)
+                    <div id="p1-badge" class="bg-white border-2 border-pink-100 rounded-xl px-2.5 py-1 transition-all duration-300">
+                        <div class="text-[8px] font-black text-pink-600 flex items-center gap-0.5">
+                            <i class="fa-solid fa-circle text-[6px] animate-pulse"></i> P1 (ชมพู)
                         </div>
-                        <div class="text-sm font-bold text-slate-800 truncate max-w-[80px]" id="p1-display-name">ผู้เล่น 1</div>
-                        <div class="text-lg font-black text-emerald-600" id="p1-score-val">0 คะแนน</div>
+                        <div class="text-xs font-extrabold text-slate-700 truncate max-w-[70px]" id="p1-display-name">ผู้เล่น 1</div>
+                        <div class="text-sm font-black text-pink-600" id="p1-score-val">0 คะแนน</div>
                     </div>
 
-                    <div class="text-xs font-black text-slate-400">VS</div>
+                    <div class="text-[10px] font-black text-purple-300">VS</div>
 
                     <!-- Player 2 Score badge -->
-                    <div id="p2-badge" class="bg-white border-2 border-slate-200 rounded-xl px-3 py-1.5 transition-all duration-300">
-                        <div class="text-[9px] font-black text-indigo-600 flex items-center gap-1">
-                            <i class="fa-solid fa-circle text-[7px] animate-pulse"></i> P2 (สีน้ำเงิน)
+                    <div id="p2-badge" class="bg-white border-2 border-blue-100 rounded-xl px-2.5 py-1 transition-all duration-300">
+                        <div class="text-[8px] font-black text-blue-600 flex items-center gap-0.5">
+                            <i class="fa-solid fa-circle text-[6px] animate-pulse"></i> P2 (ฟ้า)
                         </div>
-                        <div class="text-sm font-bold text-slate-800 truncate max-w-[80px]" id="p2-display-name">ผู้เล่น 2</div>
-                        <div class="text-lg font-black text-indigo-600" id="p2-score-val">0 คะแนน</div>
+                        <div class="text-xs font-extrabold text-slate-700 truncate max-w-[70px]" id="p2-display-name">ผู้เล่น 2</div>
+                        <div class="text-sm font-black text-blue-600" id="p2-score-val">0 คะแนน</div>
                     </div>
                 </div>
 
-                <div class="h-8 w-[1.5px] bg-slate-300"></div>
+                <div class="h-8 w-[1.5px] bg-purple-100"></div>
+
+                <!-- Music Control Toggle -->
+                <button onclick="toggleMusic()" id="btn-music-toggle" class="bg-amber-100 hover:bg-amber-200 text-amber-800 border-2 border-amber-300 text-xs font-black p-2 rounded-xl transition duration-150 flex items-center justify-center shadow-sm" title="เปิด/ปิด เพลงประกอบ">
+                    <i class="fa-solid fa-music"></i>
+                </button>
                 
-                <button onclick="toggleJournal()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black py-2.5 px-3 rounded-xl transition duration-250 flex items-center gap-1.5 shadow-sm">
+                <button onclick="toggleJournal()" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-xs font-black py-2 px-3 rounded-xl transition duration-150 flex items-center gap-1 shadow-md">
                     <i class="fa-solid fa-book"></i>
-                    <span>สมุดบันทึก 3R</span>
+                    <span>สมุดบันทึก</span>
                 </button>
             </div>
         </div>
@@ -168,85 +181,85 @@
     <div id="start-screen" class="my-auto max-w-4xl w-full mx-auto p-4 sm:p-6 transition-all duration-300 z-30">
         
         <!-- Big Hero Branding banner -->
-        <div class="text-center mb-8">
-            <h2 class="text-4xl sm:text-5xl font-extrabold text-emerald-950 mb-2 tracking-tight flex items-center justify-center gap-2">
+        <div class="text-center mb-6">
+            <h2 class="text-3xl sm:text-5xl font-black bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2 tracking-tight flex flex-wrap items-center justify-center gap-2">
                 <span>3R จับคู่กู้สิ่งแวดล้อม</span>
-                <i class="fa-solid fa-leaf text-emerald-600 text-3xl animate-bounce"></i>
+                <i class="fa-solid fa-gamepad text-pink-500 animate-bounce"></i>
             </h2>
-            <p class="text-slate-600 text-base font-bold">เกมเปิดแผ่นป้ายเรียนรู้ ลด ใช้ซ้ำ แปรรูป เพื่อร่วมกันกอบกู้ระบบนิเวศน์แบบไร้รอยต่อ!</p>
+            <p class="text-slate-700 text-sm sm:text-base font-extrabold">เกมเปิดแผ่นป้ายลดมลพิษฉบับการ์ดขนาดใหญ่พิเศษ เล่นลื่น สดใส น่ารัก และเสถียรสุดๆ 🌍✨</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
             
             <!-- Left Side Card: Student Play Portal -->
-            <div class="bg-gradient-to-b from-emerald-50 to-emerald-100/50 rounded-3xl p-6 border-4 border-emerald-500 shadow-xl flex flex-col justify-between space-y-6">
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-pink-400 shadow-xl flex flex-col justify-between space-y-6">
                 <div>
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">สำหรับนักเรียน</span>
-                        <h3 class="text-xl font-black text-emerald-950 flex items-center gap-1.5">
-                            <i class="fa-solid fa-gamepad text-emerald-600"></i>
-                            <span>เข้าร่วมเล่นเกม (เริ่มภารกิจ)</span>
+                        <span class="bg-pink-500 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">สำหรับนักเรียน</span>
+                        <h3 class="text-lg sm:text-xl font-black text-purple-950 flex items-center gap-1.5">
+                            <i class="fa-solid fa-play text-pink-500"></i>
+                            <span>ลุยภารกิจรักษ์โลก 3R</span>
                         </h3>
                     </div>
                     <p class="text-xs text-slate-600 font-semibold leading-relaxed mb-4">
-                        เข้าเล่นเกมจับคู่ได้ง่ายๆ บนเครื่องนี้ เลือกเล่นแบบท้าทายตัวเองคนเดียว หรือสลับตาประลองแข่งขัน 2 คนในห้องเรียน เมื่อจบเกมจะมีไฟล์รายงานให้ดาวน์โหลดส่งคุณครูครับ
+                        เกมจับคู่จับกลุ่มคัดแยกขยะ 10 ใบ ขนาดพอดีจิ้มง่ายบนจอมือถือ คุณครูสามารถให้นักเรียนเล่นแบบคนเดียว หรือแบ่งกลุ่ม 2 คนแข่งสลับตากันขีดเขียนอภิปรายตอบคำถามได้เลยครับ
                     </p>
 
                     <!-- Solo & Versus switch -->
                     <div class="grid grid-cols-2 gap-2 mb-4">
-                        <button onclick="setOfflineMode('solo')" id="btn-mode-solo" class="py-3 px-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-emerald-950 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform scale-105">
-                            <i class="fa-solid fa-user text-lg text-emerald-600"></i>
+                        <button onclick="setOfflineMode('solo')" id="btn-mode-solo" class="py-3 px-3 rounded-2xl border-4 border-pink-500 bg-pink-50 text-pink-950 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform scale-105">
+                            <i class="fa-solid fa-user text-lg text-pink-600"></i>
                             <span>เล่นคนเดียว (Solo)</span>
                         </button>
                         <button onclick="setOfflineMode('versus')" id="btn-mode-versus" class="py-3 px-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-700 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform opacity-70">
                             <i class="fa-solid fa-user-group text-lg text-indigo-500"></i>
-                            <span>เล่น 2 คน (Local VS)</span>
+                            <span>แข่ง 2 คน (Local VS)</span>
                         </button>
                     </div>
 
                     <!-- Name fields -->
-                    <div class="p-4 bg-white border border-slate-200 rounded-2xl space-y-3 shadow-inner">
+                    <div class="p-4 bg-purple-50/50 border-2 border-purple-100 rounded-2xl space-y-3">
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-700 mb-1" id="p1-offline-label">ชื่อผู้เล่น</label>
+                            <label class="block text-[10px] font-bold text-purple-950 mb-1" id="p1-offline-label">ชื่อผู้เล่น</label>
                             <input type="text" id="p1-offline-input" placeholder="ระบุชื่อผู้เล่น..." value="ผู้เล่น 1"
-                                   class="w-full bg-slate-50 border border-slate-300 rounded-xl py-2.5 px-3 text-slate-900 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                   class="w-full bg-white border border-purple-200 rounded-xl py-2 px-3 text-purple-950 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-pink-500">
                         </div>
                         <div id="p2-offline-field" class="hidden">
-                            <label class="block text-[10px] font-bold text-slate-700 mb-1">ชื่อผู้เล่นคนที่ 2</label>
+                            <label class="block text-[10px] font-bold text-purple-950 mb-1">ชื่อผู้เล่นคนที่ 2</label>
                             <input type="text" id="p2-offline-input" placeholder="ระบุชื่อผู้เล่นคนที่ 2..." value="ผู้เล่น 2"
-                                   class="w-full bg-slate-50 border border-slate-300 rounded-xl py-2.5 px-3 text-indigo-950 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                   class="w-full bg-white border border-purple-200 rounded-xl py-2 px-3 text-purple-950 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-pink-500">
                         </div>
                     </div>
                 </div>
 
-                <button onclick="startOfflineGame()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-4 rounded-2xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
-                    <span>ตกลง และเริ่มภารกิจรักษ์โลก 🎮</span>
-                    <i class="fa-solid fa-play"></i>
+                <button onclick="startOfflineGame()" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-black py-3.5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2 text-sm pulse-slow">
+                    <span>ตกลง และเริ่มจับคู่กู้โลกกันเลย! 🎮</span>
+                    <i class="fa-solid fa-star"></i>
                 </button>
             </div>
 
             <!-- Right Side Card: Teacher Dashboard Portal -->
-            <div class="bg-gradient-to-b from-indigo-50 to-indigo-100/50 rounded-3xl p-6 border-4 border-indigo-500 shadow-xl flex flex-col justify-between space-y-6">
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-indigo-400 shadow-xl flex flex-col justify-between space-y-6">
                 <div>
                     <div class="flex items-center gap-2 mb-3">
                         <span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">สำหรับคุณครู</span>
-                        <h3 class="text-xl font-black text-indigo-950 flex items-center gap-1.5">
+                        <h3 class="text-lg sm:text-xl font-black text-indigo-950 flex items-center gap-1.5">
                             <i class="fa-solid fa-chalkboard-user text-indigo-600"></i>
-                            <span>โหมดคุณครู (ตรวจคะแนนย้อนหลัง)</span>
+                            <span>โหมดคุณครู (ตรวจแต้มย้อนหลัง)</span>
                         </h3>
                     </div>
                     <p class="text-xs text-slate-600 font-semibold leading-relaxed mb-4">
-                        คุณครูสามารถตรวจสอบคะแนนและคำตอบอธิบายเชิงวิเคราะห์ย้อนหลังของนักเรียนได้ง่ายๆ โดยการนำไฟล์คำตอบที่นักเรียนส่งมา (ไฟล์รหัส .json) มาเปิดอ่านตรวจดูในระบบนี้ได้ทันที ไม่ต้องต่ออินเทอร์เน็ต!
+                        คุณครูสามารถประเมินผลคะแนน และตรวจสอบประวัติบทวิเคราะห์คำอธิบายการประยุกต์ใช้ 3R ย้อนหลังของนักเรียนได้ง่ายๆ โดยการนำไฟล์คำตอบ (ไฟล์ .json) ที่นักเรียนส่งมาอัปโหลดขึ้นตรวจดูบนเครื่องของคุณครูได้ทันทีครับ
                     </p>
 
-                    <div class="p-4 bg-white border border-indigo-200 rounded-2xl space-y-3 text-center shadow-inner">
+                    <div class="p-4 bg-indigo-50 border border-indigo-150 rounded-2xl space-y-3 text-center shadow-inner">
                         <i class="fa-solid fa-file-shield text-indigo-500 text-3xl"></i>
-                        <p class="text-[11px] text-slate-500 font-bold">เปิดกล่องเครื่องมือครู เพื่ออัปโหลดและวิเคราะห์คำตอบย้อนหลัง</p>
+                        <p class="text-[11px] text-slate-500 font-bold">เปิดกล่องเครื่องมือครู เพื่อตรวจให้คะแนนนักเรียนรายบุคคล</p>
                     </div>
                 </div>
 
                 <button onclick="openTeacherPortal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-4 rounded-2xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
-                    <span>เข้าสู่โหมดคุณครูผู้สอน 🎯</span>
+                    <span>เข้าสู่โหมดตรวจงานคุณครู 🎯</span>
                     <i class="fa-solid fa-clipboard-user"></i>
                 </button>
             </div>
@@ -257,9 +270,9 @@
     <div id="teacher-monitor-screen" class="hidden max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6 flex-grow flex flex-col">
         
         <!-- Teacher Header Panel -->
-        <div class="bg-gradient-to-r from-indigo-900 via-indigo-950 to-slate-950 text-white rounded-3xl p-6 shadow-xl border-4 border-indigo-500/50 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="bg-gradient-to-r from-purple-800 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 shadow-xl border-4 border-indigo-400 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="space-y-1">
-                <div class="text-[10px] font-black tracking-widest text-indigo-400 uppercase">3R Classroom Teacher Offline Board</div>
+                <div class="text-[10px] font-black tracking-widest text-indigo-300 uppercase">3R Classroom Teacher Offline Board</div>
                 <h3 class="text-2xl font-black flex items-center gap-2">
                     <span>ระบบตรวจสอบผลสัมฤทธิ์ทางการเรียนรู้ (โหมดคุณครู) 🏫</span>
                 </h3>
@@ -268,7 +281,7 @@
             
             <!-- File Import Box -->
             <div class="bg-white/10 p-3 rounded-2xl border border-white/20 flex flex-col items-center gap-2">
-                <label for="teacher-file-uploader" class="cursor-pointer bg-yellow-500 hover:bg-yellow-600 text-slate-950 font-black py-2 px-4 rounded-xl text-xs transition flex items-center gap-2 shadow">
+                <label for="teacher-file-uploader" class="cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-black py-2 px-4 rounded-xl text-xs transition flex items-center gap-2 shadow">
                     <i class="fa-solid fa-file-import"></i>
                     <span>อัปโหลดไฟล์คำตอบนักเรียน (.json)</span>
                 </label>
@@ -282,7 +295,7 @@
             <div class="lg:col-span-7 bg-white rounded-3xl border border-slate-200 shadow-lg p-5 flex flex-col">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
                     <h4 class="font-black text-slate-900 text-base flex items-center gap-2">
-                        <i class="fa-solid fa-table-list text-emerald-600"></i>
+                        <i class="fa-solid fa-table-list text-purple-600"></i>
                         <span>สรุปตารางคะแนนนักเรียนในระบบ (<span id="monitor-student-count">0</span> คน)</span>
                     </h4>
                 </div>
@@ -324,26 +337,21 @@
         </div>
     </div>
 
-    <!-- Active Turn Toast Indicator (Versus Mode) -->
-    <div id="turn-toast" class="fixed top-24 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm font-black px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300 z-30">
-        <span id="turn-toast-emoji">🔄</span>
-        <span id="turn-toast-message">สลับตาผู้เล่น!</span>
-    </div>
-
     <!-- Main Game Board Workspace -->
-    <main id="game-workspace" class="hidden flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 flex flex-col lg:flex-row gap-6">
+    <main id="game-workspace" class="hidden flex-grow max-w-7xl w-full mx-auto p-4 flex flex-col lg:flex-row gap-6">
         
         <!-- Game Board Container -->
         <div class="flex-grow flex flex-col justify-center">
             <!-- Active Player Banner in Versus Mode -->
-            <div id="versus-turn-banner" class="hidden text-center mb-4 p-3 bg-white rounded-2xl border-2 border-slate-200 transition-all duration-300 shadow">
-                <span class="text-xs uppercase font-extrabold tracking-widest text-slate-500 block">เทิร์นปัจจุบัน</span>
-                <span id="active-player-name" class="text-xl font-black text-emerald-600 animate-pulse">ผู้เล่น 1 (สีเขียว)</span>
+            <div id="versus-turn-banner" class="hidden text-center mb-4 p-3 bg-white/95 rounded-2xl border-2 border-pink-200 transition-all duration-300 shadow">
+                <span class="text-[10px] uppercase font-black tracking-widest text-purple-400 block">ผู้ที่ต้องเปิดการ์ด</span>
+                <span id="active-player-name" class="text-lg font-black text-pink-600 animate-pulse">ผู้เล่น 1 (สีชมพู)</span>
             </div>
 
-            <!-- 5x6 Grid Board -->
+            <!-- 10 Cards Grid Board (Optimized for Mobile Screens to be Big) -->
             <div id="game-board-wrapper" class="w-full">
-                <div id="game-board" class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3.5 perspective-1000 max-w-4xl mx-auto w-full">
+                <!-- 2 cols on mobile, 5 cols on wider screen. Card size is maximized! -->
+                <div id="game-board" class="grid grid-cols-2 sm:grid-cols-5 gap-3.5 sm:gap-4 max-w-3xl mx-auto w-full">
                     <!-- Cards will be dynamically injected here by JavaScript -->
                 </div>
             </div>
@@ -352,50 +360,50 @@
         <!-- Right Side Panel: Quick Eco Guide & Live Journal -->
         <aside class="w-full lg:w-80 flex flex-col gap-4 shrink-0">
             <!-- Educational Guide Card -->
-            <div class="bg-white rounded-3xl p-5 border border-emerald-100 shadow-sm">
-                <h3 class="text-md font-bold text-emerald-800 mb-3 flex items-center gap-1.5">
+            <div class="bg-white/95 rounded-3xl p-5 border border-purple-100 shadow-sm">
+                <h3 class="text-md font-extrabold text-purple-800 mb-3 flex items-center gap-1.5">
                     <i class="fa-solid fa-circle-nodes"></i>
                     <span>คู่มือถอดรหัสรักษ์โลก 3R</span>
                 </h3>
                 <div class="space-y-3 text-xs">
-                    <div class="p-2.5 bg-blue-50/60 border border-blue-200/50 rounded-xl">
+                    <div class="p-2.5 bg-blue-50/80 border border-blue-200/50 rounded-xl">
                         <strong class="text-blue-700 block mb-0.5">🔵 REDUCE (ลดการใช้)</strong>
                         <p class="text-slate-600 font-semibold">ลดการสร้างขยะตั้งแต่แรกเริ่ม หลีกเลี่ยงหีบห่อ และสิ่งของฟุ่มเฟือย</p>
                     </div>
-                    <div class="p-2.5 bg-amber-50/60 border border-amber-200/50 rounded-xl">
+                    <div class="p-2.5 bg-amber-50/80 border border-amber-200/50 rounded-xl">
                         <strong class="text-amber-700 block mb-0.5">🟡 REUSE (ใช้ซ้ำ)</strong>
                         <p class="text-slate-600 font-semibold">นำกลับมาหมุนเวียนใช้ประโยชน์ซ้ำจนกว่าจะหมดสภาพ ยืดอายุผลิตภัณฑ์</p>
                     </div>
-                    <div class="p-2.5 bg-emerald-50/60 border border-emerald-200/50 rounded-xl">
-                        <strong class="text-emerald-700 block mb-0.5">🟢 RECYCLE (แปรรูปนำกลับมาใช้)</strong>
+                    <div class="p-2.5 bg-rose-50/80 border border-rose-200/50 rounded-xl">
+                        <strong class="text-rose-700 block mb-0.5">🔴 RECYCLE (แปรรูปนำกลับมาใช้)</strong>
                         <p class="text-slate-600 font-semibold">คัดแยกและส่งแปรรูปหลอมขึ้นรูปใหม่ เพื่อสร้างมูลค่าขยะให้กลับเป็นสินค้า</p>
                     </div>
                 </div>
             </div>
 
             <!-- Current Player Danger Logs Badge -->
-            <div class="bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-3xl p-5 shadow-lg relative overflow-hidden border border-slate-700">
-                <div class="absolute -right-8 -bottom-8 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl"></div>
+            <div class="bg-gradient-to-br from-purple-800 to-indigo-950 text-white rounded-3xl p-5 shadow-lg relative overflow-hidden border border-purple-700">
+                <div class="absolute -right-8 -bottom-8 w-24 h-24 bg-pink-500/10 rounded-full blur-xl"></div>
                 <div class="relative z-10 space-y-3">
-                    <div class="text-[10px] uppercase font-bold tracking-widest text-indigo-400" id="tracker-header">Eco Hazard Tracker</div>
+                    <div class="text-[10px] uppercase font-bold tracking-widest text-pink-300" id="tracker-header">Eco Hazard Tracker</div>
                     
                     <div class="space-y-1.5">
                         <div class="text-xs font-semibold flex items-center justify-between">
                             <span class="flex items-center gap-1">
-                                <i class="fa-solid fa-burst text-rose-400"></i> โดนระเบิดขยะสะสม:
+                                <i class="fa-solid fa-burst text-rose-300"></i> โดนระเบิดขยะสะสม:
                             </span>
-                            <span id="p1-bomb-hits" class="font-bold text-white bg-rose-950/70 px-2.5 py-0.5 rounded-full border border-rose-800">P1: 0 ครั้ง</span>
+                            <span id="p1-bomb-hits" class="font-bold text-white bg-pink-950/70 px-2.5 py-0.5 rounded-full border border-pink-800">P1: 0 ครั้ง</span>
                         </div>
                         <div id="p2-bomb-tracker-row" class="text-xs font-semibold flex items-center justify-between hidden">
                             <span class="flex items-center gap-1">
-                                <i class="fa-solid fa-burst text-rose-400"></i> โดนระเบิดขยะสะสม:
+                                <i class="fa-solid fa-burst text-rose-300"></i> โดนระเบิดขยะสะสม:
                             </span>
-                            <span id="p2-bomb-hits" class="font-bold text-white bg-indigo-950/70 px-2.5 py-0.5 rounded-full border border-indigo-800">P2: 0 ครั้ง</span>
+                            <span id="p2-bomb-hits" class="font-bold text-white bg-blue-950/70 px-2.5 py-0.5 rounded-full border border-blue-800">P2: 0 ครั้ง</span>
                         </div>
                     </div>
 
                     <div class="mt-4 flex items-center gap-2 text-xs bg-white/10 py-1.5 px-3 rounded-xl border border-white/10 w-fit">
-                        <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+                        <i class="fa-solid fa-shield-halved text-pink-300"></i>
                         <span id="game-state-badge">สถานะระบบ: โหมดเครื่องเดียว</span>
                     </div>
                 </div>
@@ -405,14 +413,14 @@
 
     <!-- Reflection/Explanation Input Modal (Crucial Step for pedagogical flow) -->
     <div id="reflection-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border-4 border-emerald-400 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border-4 border-pink-400 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <!-- Modal Header -->
-            <div id="modal-header-container" class="bg-emerald-900 text-white px-6 py-4 flex items-center justify-between border-b border-emerald-800">
+            <div id="modal-header-container" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-4 flex items-center justify-between border-b border-pink-400">
                 <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-atom text-xl text-emerald-300 animate-spin-slow"></i>
+                    <i class="fa-solid fa-atom text-xl text-yellow-300 animate-spin-slow"></i>
                     <h3 class="font-bold text-lg">การจับคู่สำเร็จยอดเยี่ยม! 🔗</h3>
                 </div>
-                <div class="text-xs bg-emerald-950 text-emerald-300 font-bold px-3 py-1 rounded-full border border-emerald-800" id="modal-category-badge">
+                <div class="text-xs bg-yellow-400 text-amber-950 font-black px-3 py-1 rounded-full border border-yellow-300 shadow-sm" id="modal-category-badge">
                     REUSE
                 </div>
             </div>
@@ -420,23 +428,23 @@
             <!-- Modal Content -->
             <div class="p-6 overflow-y-auto max-h-[70vh] space-y-5">
                 <p class="text-slate-700 text-sm font-semibold">
-                    <i class="fa-solid fa-user-check text-emerald-600"></i> สิทธิ์ในการตอบข้อความของ: <span id="modal-active-player" class="font-black text-emerald-600 text-base">ผู้เล่น 1</span>
+                    <i class="fa-solid fa-user-check text-pink-500"></i> สิทธิ์ในการตอบข้อความของ: <span id="modal-active-player" class="font-black text-pink-600 text-base">ผู้เล่น 1</span>
                 </p>
-                <p class="text-slate-600 text-xs">การ์ดคู่นี้อยู่ในแนวคิดเดียวกันคือ <span class="font-bold text-emerald-600" id="modal-category-text">REUSE</span> ! ให้นักเรียนระบุแนวทางการประยุกใช้สิ่งของทั้งสองชิ้นลงในช่องข้างล่างครับ:</p>
+                <p class="text-slate-600 text-xs">การ์ดคู่นี้อยู่ในแนวคิดเดียวกันคือ <span class="font-bold text-purple-600" id="modal-category-text">REUSE</span> ! ให้นักเรียนระบุแนวทางการประยุกต์ใช้สิ่งของทั้งสองชิ้นลงในช่องข้างล่างครับ:</p>
                 
                 <!-- Cards side by side preview -->
                 <div class="grid grid-cols-2 gap-4">
                     <!-- Left Card Concept -->
                     <div class="bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center relative overflow-hidden">
-                        <span class="text-xs uppercase font-extrabold text-slate-500 mb-1" id="modal-card1-top-type">REDUCE</span>
-                        <div id="modal-card1-emoji" class="text-4xl my-2">🧾</div>
-                        <div id="modal-card1-name" class="font-bold text-slate-800 text-sm">ใบเสร็จอิเล็กทรอนิกส์</div>
+                        <span class="text-[10px] uppercase font-black text-slate-500 mb-1" id="modal-card1-top-type">REDUCE</span>
+                        <div id="modal-card1-emoji" class="text-5xl my-2">🧾</div>
+                        <div id="modal-card1-name" class="font-extrabold text-slate-800 text-sm">ใบเสร็จอิเล็กทรอนิกส์</div>
                     </div>
                     <!-- Right Card Concept -->
                     <div class="bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center relative overflow-hidden">
-                        <span class="text-xs uppercase font-extrabold text-slate-500 mb-1" id="modal-card2-top-type">REUSE</span>
-                        <div id="modal-card2-emoji" class="text-4xl my-2">📚</div>
-                        <div id="modal-card2-name" class="font-bold text-slate-800 text-sm">หนังสือเก่า</div>
+                        <span class="text-[10px] uppercase font-black text-slate-500 mb-1" id="modal-card2-top-type">REUSE</span>
+                        <div id="modal-card2-emoji" class="text-5xl my-2">📚</div>
+                        <div id="modal-card2-name" class="font-extrabold text-slate-800 text-sm">หนังสือเก่า</div>
                     </div>
                 </div>
 
@@ -445,26 +453,26 @@
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1">
                             <span id="modal-card1-label-emoji">🧾</span>
-                            <span>... <span class="text-slate-900 font-black" id="modal-card1-label-name">ใบเสร็จอิเล็กทรอนิกส์</span></span>
+                            <span>แนวคิดสำหรับ: <span class="text-slate-900 font-black" id="modal-card1-label-name">ใบเสร็จอิเล็กทรอนิกส์</span></span>
                         </label>
                         <textarea id="explanation-input-1" placeholder="พิมพ์วิธีการประยุกต์ใช้เพื่อการรักษ์โลกที่นี่..." 
-                                  rows="2" class="w-full border-2 border-slate-200 rounded-xl p-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm bg-slate-50 font-semibold"></textarea>
+                                  rows="2" class="w-full border-2 border-purple-200 rounded-xl p-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm bg-slate-50 font-semibold"></textarea>
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1">
                             <span id="modal-card2-label-emoji">📚</span>
-                            <span>... <span class="text-slate-900 font-black" id="modal-card2-label-name">หนังสือเก่า</span></span>
+                            <span>แนวคิดสำหรับ: <span class="text-slate-900 font-black" id="modal-card2-label-name">หนังสือเก่า</span></span>
                         </label>
                         <textarea id="explanation-input-2" placeholder="พิมพ์วิธีการประยุกต์ใช้เพื่อการรักษ์โลกที่นี่..." 
-                                  rows="2" class="w-full border-2 border-slate-200 rounded-xl p-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm bg-slate-50 font-semibold"></textarea>
+                                  rows="2" class="w-full border-2 border-purple-200 rounded-xl p-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm bg-slate-50 font-semibold"></textarea>
                     </div>
                 </div>
 
                 <!-- Guidance Tips -->
-                <div class="p-3.5 bg-emerald-50 border border-emerald-100 rounded-xl text-xs text-emerald-800 flex gap-2">
-                    <i class="fa-solid fa-microchip text-base shrink-0 mt-0.5 animate-pulse"></i>
+                <div class="p-3.5 bg-pink-50 border border-pink-100 rounded-xl text-xs text-pink-800 flex gap-2">
+                    <i class="fa-solid fa-lightbulb text-base shrink-0 mt-0.5 animate-pulse"></i>
                     <div>
-                        <strong>คำอธิบายกู้โลก:</strong> ร่วมแชร์มุมมองความคิดว่าสิ่งนี้เมื่อประมวลผลตามระบบ 3R แล้ว จะช่วยลดขยะและทรัพยากรโลกได้อย่างไรบ้าง
+                        <strong>คำอธิบายกู้โลก:</strong> ร่วมแชร์มุมมองความคิดว่าสิ่งนี้เมื่ออภิปรายประมวลผลตามระบบ 3R แล้ว จะช่วยลดขยะและทรัพยากรโลกได้อย่างไรบ้าง
                     </div>
                 </div>
             </div>
@@ -472,19 +480,19 @@
             <!-- Modal Footer -->
             <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-3">
                 <span id="modal-warning" class="text-xs text-rose-500 font-bold mr-auto hidden">รบกวนนักเรียนกรอกคำอธิบายให้ครบถ้วนทั้งสองกล่องก่อนบันทึกนะคร้าบ! 😊</span>
-                <button onclick="submitExplanation()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-2.5 px-6 rounded-xl shadow-md transition flex items-center gap-2">
+                <button onclick="submitExplanation()" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-extrabold py-2.5 px-6 rounded-xl shadow-md transition flex items-center gap-2">
                     <span>บันทึกความรู้และเปิดกระดานต่อ</span>
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <i class="fa-solid fa-check-double"></i>
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Learning Journal Sidebar/Drawer -->
-    <div id="journal-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl border-l-4 border-emerald-500 z-50 flex flex-col translate-x-full transition-transform duration-300">
-        <div class="p-4 bg-slate-900 text-white flex items-center justify-between">
+    <div id="journal-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl border-l-4 border-pink-500 z-50 flex flex-col translate-x-full transition-transform duration-300">
+        <div class="p-4 bg-purple-950 text-white flex items-center justify-between">
             <h3 class="font-bold flex items-center gap-1.5">
-                <i class="fa-solid fa-list-check text-emerald-400"></i>
+                <i class="fa-solid fa-list-check text-pink-400"></i>
                 <span>ประวัติบันทึกการเรียนรู้ (3R Log)</span>
             </h3>
             <button onclick="toggleJournal()" class="text-white/80 hover:text-white p-1 text-lg">
@@ -500,7 +508,7 @@
         </div>
         <!-- Journal action buttons -->
         <div class="p-4 bg-slate-50 border-t border-slate-100 space-y-2">
-            <button onclick="copyJournalToClipboard()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-sm shadow">
+            <button onclick="copyJournalToClipboard()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-sm shadow">
                 <i class="fa-solid fa-copy"></i>
                 <span>คัดลอกบันทึกข้อมูลส่งครู</span>
             </button>
@@ -509,7 +517,7 @@
 
     <!-- Game End / Victory Overlay Screen -->
     <div id="end-screen" class="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border-4 border-emerald-400 text-center relative overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border-4 border-pink-400 text-center relative overflow-hidden flex flex-col max-h-[90vh]">
             
             <div class="overflow-y-auto space-y-6 pr-1">
                 <!-- Trophy Graphic -->
@@ -518,20 +526,20 @@
                 </div>
                 
                 <div>
-                    <h2 class="text-2xl sm:text-3xl font-black text-emerald-950" id="end-title">สรุปผลการประลอง 3R! 🏆</h2>
+                    <h2 class="text-2xl sm:text-3xl font-black text-purple-950" id="end-title">สรุปผลการประลอง 3R! 🏆</h2>
                     <p class="text-slate-500 text-sm font-semibold mt-1">นักประดิษฐ์คนเก่งได้กู้เศษอาหารและขยะมลพิษกลับเข้าสู่สมดุลได้สำเร็จ</p>
                 </div>
 
                 <!-- Final Multi-player Stats Layout -->
                 <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 space-y-3 max-w-md mx-auto text-left" id="end-stats-container">
-                    <!-- Dynaimc Stats injected here by JS -->
+                    <!-- Dynamic Stats injected here by JS -->
                 </div>
 
                 <!-- Summarized Explanations for copy -->
                 <div class="text-left space-y-3">
                     <h3 class="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center justify-between">
                         <span>ข้อมูลสรุปบันทึกการเรียนรู้</span>
-                        <button onclick="downloadStudentJSON()" class="text-[10px] text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-1.5 rounded-lg hover:bg-indigo-100 transition flex items-center gap-1 font-bold">
+                        <button onclick="downloadStudentJSON()" class="text-[10px] text-pink-700 bg-pink-50 border border-pink-200 px-2.5 py-1.5 rounded-lg hover:bg-pink-100 transition flex items-center gap-1 font-bold">
                             <i class="fa-solid fa-file-arrow-down"></i> ดาวน์โหลดไฟล์ส่งครู (.json)
                         </button>
                     </h3>
@@ -548,7 +556,7 @@
                     <i class="fa-solid fa-arrow-rotate-left"></i>
                     <span>กลับสู่หน้าแรก</span>
                 </button>
-                <button onclick="copyJournalToClipboard();" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3.5 rounded-2xl shadow-lg shadow-emerald-600/20 transition flex items-center justify-center gap-2 text-sm">
+                <button onclick="copyJournalToClipboard();" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-black py-3.5 rounded-2xl shadow-lg shadow-pink-600/20 transition flex items-center justify-center gap-2 text-sm">
                     <i class="fa-solid fa-copy"></i>
                     <span>คัดลอกคำตอบพิมพ์ส่งคุณครู</span>
                 </button>
@@ -558,53 +566,13 @@
 
     <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300 z-50">
-        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <i class="fa-solid fa-circle-check text-pink-400"></i>
         <span id="toast-message">คัดลอกรายงานเรียบร้อยแล้ว!</span>
     </div>
 
     <!-- Gameplay Scripts -->
     <script>
-        // --- GLOBAL GAME DATA VARIABLES (Explicitly Bound to Global Scope) ---
-        window.rawCardPool = [
-            // REDUCE (ลดการใช้ - 10 ใบ)
-            { id: 1, type: "reduce", emoji: "🧺", name: "ตะกร้าจ่ายตลาด" },
-            { id: 2, type: "reduce", emoji: "🚫", name: "ปฏิเสธใบปลิว" },
-            { id: 3, type: "reduce", emoji: "🥤", name: "แก้วน้ำส่วนตัว" },
-            { id: 4, type: "reduce", emoji: "👶", name: "ผ้าอ้อมซักได้" },
-            { id: 5, type: "reduce", emoji: "🛍️", name: "ถุงผ้า" },
-            { id: 6, type: "reduce", emoji: "🧣", name: "ผ้าเช็ดหน้า" },
-            { id: 7, type: "reduce", emoji: "🪥", name: "ปิดน้ำขณะแปรงฟัน" },
-            { id: 8, type: "reduce", emoji: "🍽️", name: "ตักอาหารพอดีจาน" },
-            { id: 9, type: "reduce", emoji: "🔌", name: "ปิดไฟเมื่อไม่ใช้" },
-            { id: 10, type: "reduce", emoji: "🍱", name: "ปิ่นโต" },
-
-            // REUSE (ใช้ซ้ำ - 10 ใบ)
-            { id: 11, type: "reuse", emoji: "🫙", name: "ขวดแก้ว" },
-            { id: 12, type: "reuse", emoji: "🎁", name: "กระดาษห่อของขวัญ" },
-            { id: 13, type: "reuse", emoji: "📚", name: "หนังสือเก่า" },
-            { id: 14, type: "reuse", emoji: "🧴", name: "ขวดพลาสติก" },
-            { id: 15, type: "reuse", emoji: "🧹", name: "ผ้าขนหนูเก่า" },
-            { id: 16, type: "reuse", emoji: "🪑", name: "เก้าอี้ขาหัก" },
-            { id: 17, type: "reuse", emoji: "👖", name: "กางเกงยีนส์เก่า" },
-            { id: 18, type: "reuse", emoji: "👜", name: "ถุงผ้า" },
-            { id: 19, type: "reuse", emoji: "📦", name: "กล่องพัสดุ" },
-            { id: 20, type: "reuse", emoji: "📄", name: "กระดาษ" },
-
-            // RECYCLE (แปรรูปเพื่อนำกลับมาใช้ - 8 ใบ เพื่อเหลือพื้นที่ให้การ์ดระเบิด 2 ใบเป็น 30 ใบถ้วน)
-            { id: 21, type: "recycle", emoji: "🛍️", name: "ถุงพลาสติกยืด" },
-            { id: 22, type: "recycle", emoji: "🍾", name: "ขวดแก้วสี" },
-            { id: 23, type: "recycle", emoji: "📄", name: "ใบปลิว" },
-            { id: 24, type: "recycle", emoji: "📰", name: "หนังสือพิมพ์" },
-            { id: 25, type: "recycle", emoji: "🥛", name: "กล่องนม" },
-            { id: 26, type: "recycle", emoji: "🥛", name: "ขวดพลาสติกขุ่น" },
-            { id: 27, type: "recycle", emoji: "🍳", name: "น้ำมันพืชใช้แล้ว" },
-            { id: 28, type: "recycle", emoji: "🧻", name: "แกนกระดาษทิชชู่" },
-
-            // BOMB CARDS (ระเบิดมลพิษหักแต้ม - 2 ใบ!)
-            { id: 29, type: "bomb", emoji: "💣", name: "ระเบิดขยะมลพิษ" },
-            { id: 30, type: "bomb", emoji: "💥", name: "ระเบิดโลกร้อน" }
-        ];
-
+        // --- GLOBAL GAME STATE VARIABLES ---
         window.isBoardLocked = false;
         window.cards = [];
         window.flippedCards = [];
@@ -623,6 +591,31 @@
         window.lastClickTime = 0;
         window.importedStudentsData = []; // Offline Teacher in-memory store
         window.lockTimestamp = null;
+        
+        // Background Music Synthesizer State
+        window.musicEnabled = false;
+        window.audioInterval = null;
+
+        // Balanced 10 Cards Pool (8 Play Cards + 2 Bomb Cards) optimized for Mobile Screen Real Estate
+        window.rawCardPool = [
+            // REDUCE (ลดการใช้ - 4 ใบ / 2 คู่)
+            { id: 1, type: "reduce", emoji: "🧺", name: "ตะกร้าจ่ายตลาด" },
+            { id: 2, type: "reduce", emoji: "🥤", name: "แก้วน้ำส่วนตัว" },
+            { id: 3, type: "reduce", emoji: "🍱", name: "ปิ่นโต" },
+            { id: 4, type: "reduce", emoji: "🛍️", name: "ถุงผ้า" },
+
+            // REUSE (ใช้ซ้ำ - 2 ใบ / 1 คู่)
+            { id: 5, type: "reuse", emoji: "🫙", name: "ขวดแก้ว" },
+            { id: 6, type: "reuse", emoji: "📦", name: "กล่องพัสดุ" },
+
+            // RECYCLE (แปรรูปเพื่อนำกลับมาใช้ - 2 ใบ / 1 คู่)
+            { id: 7, type: "recycle", emoji: "🥛", name: "กล่องนม" },
+            { id: 8, type: "recycle", emoji: "🍳", name: "น้ำมันพืชใช้แล้ว" },
+
+            // BOMB CARDS (ระเบิดมลพิษหักแต้ม - 2 ใบ)
+            { id: 9, type: "bomb", emoji: "💣", name: "ระเบิดขยะมลพิษ" },
+            { id: 10, type: "bomb", emoji: "💥", name: "ระเบิดโลกร้อน" }
+        ];
 
         // Backup mapping for global scope variables (fixing ReferenceError in various contexts)
         var rawCardPool = window.rawCardPool;
@@ -660,7 +653,6 @@
             if (el) el.classList.add(className);
         }
 
-        // Robust function to safeguard against class removal failures
         function safeRemoveClass(id, className) {
             const el = document.getElementById(id);
             if (el) el.classList.remove(className);
@@ -688,8 +680,9 @@
                     osc.start();
                     osc.stop(audioCtx.currentTime + 0.15);
                 } else if (type === 'match') {
+                    // Ascending joyful arpeggio
                     osc.type = 'sine';
-                    const notes = [293.66, 392.00, 587.33, 880.00];
+                    const notes = [329.63, 392.00, 523.25, 659.25]; // E4, G4, C5, E5 (Major)
                     notes.forEach((freq, i) => {
                         const noteOsc = audioCtx.createOscillator();
                         const noteGain = noteOsc.createGain();
@@ -697,10 +690,10 @@
                         noteGain.connect(audioCtx.destination);
                         noteOsc.type = 'triangle';
                         noteOsc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.08);
-                        noteGain.gain.setValueAtTime(0.12, audioCtx.currentTime + i * 0.08);
-                        noteGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.08 + 0.35);
+                        noteGain.gain.setValueAtTime(0.15, audioCtx.currentTime + i * 0.08);
+                        noteGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.08 + 0.4);
                         noteOsc.start(audioCtx.currentTime + i * 0.08);
-                        noteOsc.stop(audioCtx.currentTime + i * 0.08 + 0.35);
+                        noteOsc.stop(audioCtx.currentTime + i * 0.08 + 0.4);
                     });
                 } else if (type === 'fail') {
                     osc.type = 'sawtooth';
@@ -712,7 +705,7 @@
                     osc.stop(audioCtx.currentTime + 0.3);
                 } else if (type === 'explosion') {
                     osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(160, audioCtx.currentTime);
+                    osc.frequency.setValueAtTime(120, audioCtx.currentTime);
                     osc.frequency.linearRampToValueAtTime(10, audioCtx.currentTime + 0.6);
                     
                     const filter = audioCtx.createBiquadFilter();
@@ -730,13 +723,12 @@
                     osc.stop(audioCtx.currentTime + 0.7);
                 } else if (type === 'turnSwap') {
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-                    osc.frequency.setValueAtTime(554.37, audioCtx.currentTime + 0.08);
-                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.16);
-                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+                    osc.frequency.setValueAtTime(392.00, audioCtx.currentTime); // G4
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime + 0.08); // C5
+                    gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
                     osc.start();
-                    osc.stop(audioCtx.currentTime + 0.35);
+                    osc.stop(audioCtx.currentTime + 0.3);
                 } else if (type === 'victory') {
                     const victoryNotes = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50];
                     victoryNotes.forEach((freq, i) => {
@@ -746,62 +738,130 @@
                         noteGain.connect(audioCtx.destination);
                         noteOsc.type = 'sine';
                         noteOsc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.08);
-                        noteGain.gain.setValueAtTime(0.1, audioCtx.currentTime + i * 0.08);
-                        noteGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.08 + 0.45);
+                        noteGain.gain.setValueAtTime(0.12, audioCtx.currentTime + i * 0.08);
+                        noteGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.08 + 0.5);
                         noteOsc.start(audioCtx.currentTime + i * 0.08);
-                        noteOsc.stop(audioCtx.currentTime + i * 0.08 + 0.45);
+                        noteOsc.stop(audioCtx.currentTime + i * 0.08 + 0.5);
                     });
                 }
             } catch (err) {
-                console.log("Audio API contextual issue resolved.");
+                console.log("Audio contextual block bypassed.");
             }
         };
 
-        // Helper function to fetch card style/metadata
+        // LOOPING BGM SYNTHESIS (Candy Crush Style Pentatonic Happy Vibe)
+        window.toggleMusic = function() {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            window.musicEnabled = !window.musicEnabled;
+            const btn = document.getElementById('btn-music-toggle');
+
+            if (window.musicEnabled) {
+                if (btn) btn.innerHTML = '<i class="fa-solid fa-volume-high animate-pulse"></i>';
+                startBGM();
+                showToast("เปิดเสียงเพลงประกอบรื่นเริงแล้วครับ 🎵", '🎵');
+            } else {
+                if (btn) btn.innerHTML = '<i class="fa-solid fa-music"></i>';
+                stopBGM();
+                showToast("ปิดเสียงเพลงประกอบชั่วคราวครับ 🔇", '🔇');
+            }
+        };
+
+        function startBGM() {
+            stopBGM(); // Reset previous loops if any
+            
+            // Plucky Candy crush pentatonic progression melody
+            const melody = [
+                523.25, 587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33, // C5, D5, E5, G5, A5, G5, E5, D5
+                659.25, 783.99, 880.00, 1046.50, 880.00, 783.99, 659.25, 523.25  // E5, G5, A5, C6, A5, G5, E5, C5
+            ];
+            let noteIdx = 0;
+
+            window.audioInterval = setInterval(() => {
+                if (!window.musicEnabled) return;
+
+                try {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    const filter = audioCtx.createBiquadFilter();
+
+                    osc.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.type = 'triangle'; // Smooth bubble-like sound
+                    osc.frequency.setValueAtTime(melody[noteIdx], audioCtx.currentTime);
+                    
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(1000, audioCtx.currentTime); // Sweet plucky cutoff
+
+                    gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.35);
+
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.4);
+
+                    noteIdx = (noteIdx + 1) % melody.length;
+                } catch (e) {
+                    console.log("Audio synthesis schedule skip.");
+                }
+            }, 350); // Bouncy tempo
+        }
+
+        function stopBGM() {
+            if (window.audioInterval) {
+                clearInterval(window.audioInterval);
+                window.audioInterval = null;
+            }
+        }
+
+        // Helper function to fetch card style/metadata (Playful Candy/Zepquiz design)
         function getCategoryMeta(type) {
             switch(type) {
                 case 'reduce': 
                     return {
-                        outerBorder: 'border-blue-500/60',
-                        textClass: 'text-blue-700',
+                        outerBorder: 'border-pink-300 shadow-lg shadow-pink-100/50',
+                        textClass: 'text-pink-600',
                         headerTitle: 'Reduce',
-                        ribbonBg: 'bg-gradient-to-b from-blue-700 to-indigo-800',
-                        ribbonBorder: 'border-blue-800',
-                        ribbonIcon: 'fa-solid fa-cloud-download',
-                        badgeBg: 'bg-blue-600 text-white',
+                        ribbonBg: 'bg-gradient-to-b from-pink-400 to-rose-500',
+                        ribbonBorder: 'border-pink-500',
+                        ribbonIcon: 'fa-solid fa-arrow-down',
+                        badgeBg: 'bg-pink-500 text-white',
                         badgeIcon: 'fa-solid fa-minus'
                     };
                 case 'reuse': 
                     return {
-                        outerBorder: 'border-amber-500/60',
-                        textClass: 'text-amber-600',
+                        outerBorder: 'border-yellow-300 shadow-lg shadow-yellow-100/50',
+                        textClass: 'text-yellow-600',
                         headerTitle: 'Reuse',
-                        ribbonBg: 'bg-gradient-to-b from-amber-500 to-yellow-600',
-                        ribbonBorder: 'border-amber-600',
+                        ribbonBg: 'bg-gradient-to-b from-yellow-400 to-amber-500',
+                        ribbonBorder: 'border-yellow-500',
                         ribbonIcon: 'fa-solid fa-arrows-spin',
-                        badgeBg: 'bg-amber-500 text-white',
+                        badgeBg: 'bg-yellow-500 text-white',
                         badgeIcon: 'fa-solid fa-arrows-left-right'
                     };
                 case 'recycle': 
                     return {
-                        outerBorder: 'border-emerald-600/60',
-                        textClass: 'text-emerald-700',
+                        outerBorder: 'border-purple-300 shadow-lg shadow-purple-100/50',
+                        textClass: 'text-purple-600',
                         headerTitle: 'Recycle',
-                        ribbonBg: 'bg-gradient-to-b from-emerald-600 to-teal-700',
-                        ribbonBorder: 'border-emerald-700',
+                        ribbonBg: 'bg-gradient-to-b from-purple-400 to-indigo-500',
+                        ribbonBorder: 'border-purple-500',
                         ribbonIcon: 'fa-solid fa-recycle',
-                        badgeBg: 'bg-emerald-600 text-white',
+                        badgeBg: 'bg-purple-600 text-white',
                         badgeIcon: 'fa-solid fa-hand-holding-heart'
                     };
                 case 'bomb':
                     return {
-                        outerBorder: 'border-rose-600/80 bg-rose-50',
-                        textClass: 'text-rose-600 animate-pulse font-black',
-                        headerTitle: '⚠️ BOMB ⚠️',
-                        ribbonBg: 'bg-gradient-to-b from-rose-600 to-red-950',
-                        ribbonBorder: 'border-rose-800',
+                        outerBorder: 'border-red-400 shadow-lg shadow-red-100/50 bg-red-50',
+                        textClass: 'text-red-600 animate-pulse font-black',
+                        headerTitle: '⚠️ ภัยขยะ ⚠️',
+                        ribbonBg: 'bg-gradient-to-b from-red-500 to-rose-600',
+                        ribbonBorder: 'border-red-600',
                         ribbonIcon: 'fa-solid fa-bomb',
-                        badgeBg: 'bg-rose-600 text-white',
+                        badgeBg: 'bg-red-500 text-white',
                         badgeIcon: 'fa-solid fa-triangle-exclamation'
                     };
             }
@@ -819,13 +879,13 @@
             window.playSound('flip');
 
             if (mode === 'solo') {
-                if (btnSolo) btnSolo.className = "py-3 px-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-emerald-950 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform scale-105";
+                if (btnSolo) btnSolo.className = "py-3 px-3 rounded-2xl border-4 border-pink-500 bg-pink-50 text-pink-950 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform scale-105";
                 if (btnVersus) btnVersus.className = "py-3 px-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-700 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform opacity-70";
                 if (p2Field) p2Field.classList.add('hidden');
                 if (p1Label) p1Label.innerText = "ชื่อผู้เล่น";
             } else {
                 if (btnSolo) btnSolo.className = "py-3 px-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-700 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform opacity-70";
-                if (btnVersus) btnVersus.className = "py-3 px-3 rounded-2xl border-2 border-indigo-500 bg-indigo-50 text-indigo-950 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform scale-105";
+                if (btnVersus) btnVersus.className = "py-3 px-3 rounded-2xl border-4 border-pink-500 bg-pink-50 text-pink-950 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform scale-105";
                 if (p2Field) p2Field.classList.remove('hidden');
                 if (p1Label) p1Label.innerText = "ชื่อผู้เล่นคนที่ 1";
             }
@@ -839,6 +899,11 @@
             p2Name = window.p2Name;
 
             launchGameLayout();
+            
+            // Automatically play sweet background melody if enabled
+            if (window.musicEnabled) {
+                startBGM();
+            }
         };
 
         const launchGameLayout = () => {
@@ -1075,13 +1140,14 @@
             if (!board) return;
             board.innerHTML = '';
             
-            // Shuffle and deep clone (using verified rawCardPool global dataset)
+            // Shuffle and deep clone (using verified rawCardPool global dataset of 10 Cards)
             window.cards = JSON.parse(JSON.stringify(window.rawCardPool));
             cards = window.cards;
             shuffle(window.cards);
 
             window.cards.forEach((card, index) => {
                 const cardEl = document.createElement('div');
+                // Extremely mobile responsive card sizes
                 cardEl.className = 'aspect-[3/4.2] perspective-1000 relative cursor-pointer group active:scale-95 transition-transform w-full select-none';
                 cardEl.style.touchAction = 'manipulation';
                 cardEl.id = `card-${index}`;
@@ -1090,65 +1156,54 @@
                 const theme = getCategoryMeta(card.type);
 
                 cardEl.innerHTML = `
-                    <div class="card-inner absolute inset-0 w-full h-full relative transition duration-500 rounded-2xl shadow-md">
+                    <div class="card-inner absolute inset-0 w-full h-full relative transition duration-500 rounded-3xl shadow-lg">
                         
-                        <!-- CARD BACK -->
-                        <div class="card-front absolute inset-0 bg-gradient-to-br from-slate-900 via-emerald-950 to-indigo-950 rounded-2xl flex flex-col items-center justify-center p-3 text-white overflow-hidden border-2 border-emerald-500/40">
-                            <div class="absolute top-2 left-2 text-[8px] text-emerald-400/50 font-mono">+</div>
-                            <div class="absolute top-2 right-2 text-[8px] text-emerald-400/50 font-mono">+</div>
-                            <div class="absolute bottom-2 left-2 text-[8px] text-emerald-400/50 font-mono">+</div>
-                            <div class="absolute bottom-2 right-2 text-[8px] text-emerald-400/50 font-mono">+</div>
-                            <div class="absolute inset-2 border border-emerald-400/10 rounded-xl pointer-events-none"></div>
+                        <!-- CARD BACK: Playful, Bright Gradient Zepquiz style (NO tech green) -->
+                        <div class="card-front absolute inset-0 bg-gradient-to-tr from-pink-400 via-rose-400 to-amber-300 rounded-3xl flex flex-col items-center justify-center p-3 text-white overflow-hidden border-4 border-white shadow-md">
+                            <div class="absolute inset-1.5 border-2 border-dashed border-white/40 rounded-2xl pointer-events-none"></div>
                             
-                            <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-slate-950 flex flex-col items-center justify-center border-2 border-emerald-400/50 shadow-lg shadow-emerald-500/20">
-                                <div class="absolute inset-0.5 rounded-full border border-dashed border-emerald-400/30 animate-spin-slow"></div>
-                                <span class="text-xl sm:text-2xl font-black tracking-wider bg-gradient-to-r from-emerald-400 to-indigo-400 bg-clip-text text-transparent">3R</span>
-                                <span class="text-[7px] font-bold text-emerald-400/70 tracking-widest uppercase -mt-1">Eco Tech</span>
+                            <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/20 flex flex-col items-center justify-center border-4 border-white/50 shadow-inner">
+                                <span class="text-3xl sm:text-4xl font-black tracking-wider text-yellow-300 drop-shadow-md">3R</span>
                             </div>
-                            <div class="mt-3 text-[9px] text-emerald-400/80 uppercase tracking-widest font-black font-mono">3R CARD</div>
+                            <div class="mt-2 text-[10px] sm:text-xs text-white uppercase tracking-widest font-black font-sans">คู่กู้โลก</div>
                         </div>
 
-                        <!-- CARD FRONT -->
-                        <div class="card-back absolute inset-0 bg-white rounded-2xl flex flex-row overflow-hidden border-2 ${theme.outerBorder} p-1">
-                            <div class="flex-1 h-full flex flex-col justify-between p-1 relative tech-grid rounded-l-xl">
-                                <div class="absolute top-1 left-1 text-[8px] text-slate-300 font-mono">+</div>
+                        <!-- CARD FRONT: Expanded large graphics layout -->
+                        <div class="card-back absolute inset-0 bg-white rounded-3xl flex flex-row overflow-hidden border-4 ${theme.outerBorder} p-1">
+                            <div class="flex-1 h-full flex flex-col justify-between p-1.5 relative tech-grid rounded-2xl">
                                 
-                                <div class="w-full text-center py-0.5 border-b border-dashed border-slate-100">
-                                    <span class="text-[10px] sm:text-[11px] font-black tracking-wider uppercase ${theme.textClass}">
+                                <!-- Category Title on Top (Bold & Vivid) -->
+                                <div class="w-full text-center py-0.5 border-b-2 border-dashed border-slate-100">
+                                    <span class="text-xs sm:text-sm font-black tracking-wider uppercase ${theme.textClass}">
                                         ${theme.headerTitle}
                                     </span>
                                 </div>
 
-                                <div class="my-auto flex items-center justify-center py-1 relative">
-                                    <div class="absolute top-0 left-2 w-1.5 h-1.5 border-t border-l border-slate-400"></div>
-                                    <div class="absolute top-0 right-2 w-1.5 h-1.5 border-t border-r border-slate-400"></div>
-                                    <div class="absolute bottom-0 left-2 w-1.5 h-1.5 border-b border-l border-slate-400"></div>
-                                    <div class="absolute bottom-0 right-2 w-1.5 h-1.5 border-b border-r border-slate-400"></div>
-                                    
-                                    <div class="text-3xl sm:text-4xl select-none filter drop-shadow-sm transform group-hover:scale-105 transition-transform duration-300">
+                                <!-- Center Emoji (MAXIMIZED to be extremely large and detailed according to feedback) -->
+                                <div class="my-auto flex items-center justify-center py-1.5 relative">
+                                    <div class="text-6xl sm:text-7xl select-none filter drop-shadow-md transform group-hover:scale-110 transition-transform duration-300">
                                         ${card.emoji}
                                     </div>
                                 </div>
 
+                                <!-- Bottom Label / Description text -->
                                 <div class="w-full">
-                                    <div class="bg-slate-50 border border-slate-150 rounded-lg py-1 px-0.5 text-center shadow-inner">
-                                        <div class="text-[9px] sm:text-[10px] font-extrabold text-slate-900 truncate leading-tight">
+                                    <div class="bg-slate-100 border border-slate-200 rounded-xl py-1 px-0.5 text-center shadow-inner">
+                                        <div class="text-[10px] sm:text-xs font-black text-slate-800 truncate leading-tight">
                                             ${card.name}
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Right Solid Ribbon -->
-                            <div class="${theme.ribbonBg} w-[18px] sm:w-[22px] h-full flex flex-col items-center justify-between py-2 rounded-r-xl relative text-white border-l ${theme.ribbonBorder}">
-                                <div class="text-[6px] opacity-60 font-mono font-bold">+</div>
-                                <div class="w-3.5 h-3.5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
-                                    <i class="${theme.ribbonIcon} text-[7px]"></i>
+                            <!-- Right Solid Accent Ribbon -->
+                            <div class="${theme.ribbonBg} w-[18px] sm:w-[22px] h-full flex flex-col items-center justify-between py-2 rounded-r-2xl relative text-white border-l ${theme.ribbonBorder}">
+                                <div class="w-3.5 h-3.5 rounded-full bg-white/20 border border-white/30 flex items-center justify-center">
+                                    <i class="${theme.ribbonIcon} text-[8px]"></i>
                                 </div>
-                                <div class="vertical-text text-[8px] sm:text-[9px] font-bold tracking-widest uppercase opacity-90 my-auto transform rotate-180">
+                                <div class="vertical-text text-[8px] sm:text-[9px] font-black tracking-widest uppercase opacity-95 my-auto transform rotate-180">
                                     ${card.type}
                                 </div>
-                                <div class="text-[6px] opacity-60 font-mono font-bold">+</div>
                             </div>
                         </div>
 
@@ -1202,7 +1257,7 @@
                 p1Bombs = window.p1Bombs;
                 window.p1Score = Math.max(0, window.p1Score - 1);
                 p1Score = window.p1Score;
-                safeSetText('solo-score', `${window.p1Score} / 14`);
+                safeSetText('solo-score', `${window.p1Score} / 4`); // Maximum normal matches is 4 now
                 safeSetText('p1-bomb-hits', `P1: ${window.p1Bombs} ครั้ง`);
             } else {
                 if (window.activePlayer === 1) {
@@ -1229,7 +1284,7 @@
 
             // Show customized toast warning
             const currentTurnPlayerName = window.activePlayer === 1 ? window.p1Name : window.p2Name;
-            showToast(`ตู้มมม! ${currentTurnPlayerName} เปิดเจอระเบิดขยะมลพิษ หัก 1 คะแนน! 💥`, '💥');
+            showToast(`ตู้มมม! ${currentTurnPlayerName} เปิดเจอระเบิดมลพิษขยะ หัก 1 คะแนน! 💥`, '💥');
 
             setTimeout(() => {
                 const bombCard = document.getElementById(`card-${bombIndex}`);
@@ -1320,18 +1375,18 @@
             const turnBannerName = document.getElementById('active-player-name');
 
             if (window.activePlayer === 1) {
-                if (p1Badge) p1Badge.className = "bg-emerald-50 border-4 border-emerald-500 rounded-xl px-4 py-2 transition-all duration-300 scale-105 active-p1-glow";
+                if (p1Badge) p1Badge.className = "bg-pink-50 border-4 border-pink-400 rounded-xl px-4 py-2 transition-all duration-300 scale-105 active-p1-glow";
                 if (p2Badge) p2Badge.className = "bg-white border-2 border-slate-200 rounded-xl px-3 py-1.5 transition-all duration-300 scale-100 opacity-60";
                 if (turnBannerName) {
-                    turnBannerName.innerText = `${window.p1Name} (สีเขียว)`;
-                    turnBannerName.className = "text-xl font-black text-emerald-600 animate-pulse";
+                    turnBannerName.innerText = `${window.p1Name} (สีชมพู)`;
+                    turnBannerName.className = "text-xl font-black text-pink-600 animate-pulse";
                 }
             } else {
-                if (p2Badge) p2Badge.className = "bg-indigo-50 border-4 border-indigo-500 rounded-xl px-4 py-2 transition-all duration-300 scale-105 active-p2-glow";
+                if (p2Badge) p2Badge.className = "bg-blue-50 border-4 border-blue-400 rounded-xl px-4 py-2 transition-all duration-300 scale-105 active-p2-glow";
                 if (p1Badge) p1Badge.className = "bg-white border-2 border-slate-200 rounded-xl px-3 py-1.5 transition-all duration-300 scale-100 opacity-60";
                 if (turnBannerName) {
-                    turnBannerName.innerText = `${window.p2Name} (สีน้ำเงิน)`;
-                    turnBannerName.className = "text-xl font-black text-indigo-600 animate-pulse";
+                    turnBannerName.innerText = `${window.p2Name} (สีฟ้า)`;
+                    turnBannerName.className = "text-xl font-black text-blue-600 animate-pulse";
                 }
             }
         }
@@ -1368,23 +1423,23 @@
             if (window.gameMode === 'solo') {
                 if (activePlayerLabel) {
                     activePlayerLabel.innerText = activePlayerNameText;
-                    activePlayerLabel.className = "font-black text-emerald-600 text-base";
+                    activePlayerLabel.className = "font-black text-pink-600 text-base";
                 }
-                if (modalHeader) modalHeader.className = "bg-emerald-900 text-white px-6 py-4 flex items-center justify-between border-b border-emerald-800";
+                if (modalHeader) modalHeader.className = "bg-gradient-to-r from-pink-500 to-rose-500 text-white px-6 py-4 flex items-center justify-between border-b border-pink-400";
             } else {
                 if (activePlayerLabel) {
                     activePlayerLabel.innerText = `${activePlayerNameText} (ผู้เล่น ${window.activePlayer})`;
                     if (window.activePlayer === 1) {
-                        activePlayerLabel.className = "font-black text-emerald-600 text-base";
+                        activePlayerLabel.className = "font-black text-pink-600 text-base";
                     } else {
-                        activePlayerLabel.className = "font-black text-indigo-600 text-base";
+                        activePlayerLabel.className = "font-black text-blue-600 text-base";
                     }
                 }
                 if (modalHeader) {
                     if (window.activePlayer === 1) {
-                        modalHeader.className = "bg-emerald-800 text-white px-6 py-4 flex items-center justify-between border-b border-emerald-700";
+                        modalHeader.className = "bg-gradient-to-r from-pink-500 to-rose-500 text-white px-6 py-4 flex items-center justify-between border-b border-pink-400";
                     } else {
-                        modalHeader.className = "bg-indigo-900 text-white px-6 py-4 flex items-center justify-between border-b border-indigo-800";
+                        modalHeader.className = "bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-4 flex items-center justify-between border-b border-blue-400";
                     }
                 }
             }
@@ -1424,9 +1479,9 @@
 
         function getCatTextClass(type) {
             switch(type) {
-                case 'reduce': return 'text-blue-700';
-                case 'reuse': return 'text-amber-600';
-                case 'recycle': return 'text-emerald-700';
+                case 'reduce': return 'text-pink-600';
+                case 'reuse': return 'text-yellow-600';
+                case 'recycle': return 'text-purple-600';
                 default: return 'text-slate-700';
             }
         }
@@ -1434,9 +1489,9 @@
         // Standardized badge class function to prevent function mismatch crash
         function getCategoryBadgeClass(type) {
             switch(type) {
-                case 'reduce': return 'bg-blue-100 text-blue-800 border-blue-300';
-                case 'reuse': return 'bg-amber-100 text-amber-800 border-amber-300';
-                case 'recycle': return 'bg-emerald-100 text-emerald-800 border-emerald-300';
+                case 'reduce': return 'bg-pink-100 text-pink-800 border-pink-300';
+                case 'reuse': return 'bg-yellow-100 text-yellow-800 border-yellow-300';
+                case 'recycle': return 'bg-purple-100 text-purple-800 border-purple-300';
                 default: return 'bg-slate-100 text-slate-800 border-slate-300';
             }
         }
@@ -1490,11 +1545,11 @@
             matchJournal = window.matchJournal;
             updateJournalUI();
 
-            // Record scores locally
+            // Record scores locally (maximum is 4 match points now)
             if (window.gameMode === 'solo') {
                 window.p1Score++;
                 p1Score = window.p1Score;
-                safeSetText('solo-score', `${window.p1Score} / 14`);
+                safeSetText('solo-score', `${window.p1Score} / 4`);
             } else {
                 if (window.activePlayer === 1) {
                     window.p1Score++;
@@ -1518,7 +1573,7 @@
             safeAddClass('reflection-modal', 'hidden');
 
             const totalMatchesMade = window.matchJournal.length;
-            if (totalMatchesMade === 14) {
+            if (totalMatchesMade === 4) { // Only 4 pairs to match and clear
                 endGame();
             }
         };
@@ -1562,18 +1617,18 @@
 
         function getCategoryBorder(cat) {
             switch(cat) {
-                case 'reduce': return 'border-blue-500';
-                case 'reuse': return 'border-amber-500';
-                case 'recycle': return 'border-emerald-500';
-                default: return 'border-slate-500';
+                case 'reduce': return 'border-pink-400';
+                case 'reuse': return 'border-yellow-400';
+                case 'recycle': return 'border-purple-400';
+                default: return 'border-slate-400';
             }
         }
 
         function getCategoryTitleColor(cat) {
             switch(cat) {
-                case 'reduce': return 'text-blue-600';
-                case 'reuse': return 'text-amber-600';
-                case 'recycle': return 'text-emerald-600';
+                case 'reduce': return 'text-pink-600';
+                case 'reuse': return 'text-yellow-600';
+                case 'recycle': return 'text-purple-600';
                 default: return 'text-slate-600';
             }
         }
@@ -1585,6 +1640,7 @@
 
         async function endGame() {
             clearInterval(timerInterval);
+            stopBGM(); // Stop ambient loop music on win
             window.playSound('victory');
             
             confetti({
@@ -1613,7 +1669,7 @@
                             </div>
                         </div>
                         <div class="text-center font-bold text-slate-700 bg-white border border-slate-200 py-3.5 rounded-2xl mt-3">
-                            ผู้กู้โลก: <span id="end-player" class="text-emerald-600">${window.p1Name}</span>
+                            ผู้กู้โลก: <span id="end-player" class="text-pink-600">${window.p1Name}</span>
                         </div>
                     `;
                 }
@@ -1622,13 +1678,13 @@
                 let subClass = "";
                 if (window.p1Score > window.p2Score) {
                     versusVerdict = `🏆 ${window.p1Name} ชนะการแข่งขัน! 🎉`;
-                    subClass = "text-emerald-600";
+                    subClass = "text-pink-600";
                 } else if (window.p2Score > window.p1Score) {
                     versusVerdict = `🏆 ${window.p2Name} ชนะการแข่งขัน! 🎉`;
-                    subClass = "text-indigo-600";
+                    subClass = "text-blue-600";
                 } else {
                     versusVerdict = `🤝 เสมอกัน! ประลองฝีมือรักษ์โลกได้อย่างดีเยี่ยม 🤝`;
-                    subClass = "text-amber-600";
+                    subClass = "text-purple-600";
                 }
 
                 if (statsContainer) {
@@ -1637,16 +1693,16 @@
                             ${versusVerdict}
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white border-2 border-emerald-300 p-3 rounded-2xl space-y-1">
-                                <span class="text-[10px] font-black text-emerald-600 block">🟢 PLAYER 1</span>
+                            <div class="bg-white border-2 border-pink-300 p-3 rounded-2xl space-y-1">
+                                <span class="text-[10px] font-black text-pink-600 block">🟢 PLAYER 1</span>
                                 <strong class="text-base text-slate-800 font-black block truncate">${window.p1Name}</strong>
-                                <div class="text-xs text-slate-600">คะแนน: <strong class="text-emerald-600 text-sm font-black">${window.p1Score} แต้ม</strong></div>
+                                <div class="text-xs text-slate-600">คะแนน: <strong class="text-pink-600 text-sm font-black">${window.p1Score} แต้ม</strong></div>
                                 <div class="text-[10px] text-slate-500">พลาดโดนระเบิด: ${window.p1Bombs} ครั้ง</div>
                             </div>
-                            <div class="bg-white border-2 border-indigo-300 p-3 rounded-2xl space-y-1">
-                                <span class="text-[10px] font-black text-indigo-600 block">🔵 PLAYER 2</span>
+                            <div class="bg-white border-2 border-blue-300 p-3 rounded-2xl space-y-1">
+                                <span class="text-[10px] font-black text-blue-600 block">🔵 PLAYER 2</span>
                                 <strong class="text-base text-slate-800 font-black block truncate">${window.p2Name}</strong>
-                                <div class="text-xs text-slate-600">คะแนน: <strong class="text-indigo-600 text-sm font-black">${window.p2Score} แต้ม</strong></div>
+                                <div class="text-xs text-slate-600">คะแนน: <strong class="text-blue-600 text-sm font-black">${window.p2Score} แต้ม</strong></div>
                                 <div class="text-[10px] text-slate-500">พลาดโดนระเบิด: ${window.p2Bombs} ครั้ง</div>
                             </div>
                         </div>
@@ -1664,9 +1720,9 @@
                             <div class="border-b border-slate-200 pb-3 mb-3 last:border-0 last:pb-0">
                                 <div class="font-bold text-slate-800 flex items-center justify-between mb-1">
                                     <span>ชุดที่ ${index+1}: [${getCatNameThai(record.category).toUpperCase()}]</span>
-                                    <span class="text-[10px] text-emerald-600">บันทึกโดย: ${record.solvedBy}</span>
+                                    <span class="text-[10px] text-pink-600">บันทึกโดย: ${record.solvedBy}</span>
                                 </div>
-                                <p class="text-emerald-800 font-black mb-1">${record.card1Emoji} ${record.card1Name} & ${record.card2Emoji} ${record.card2Name}</p>
+                                <p class="text-pink-600 font-black mb-1">${record.card1Emoji} ${record.card1Name} & ${record.card2Emoji} ${record.card2Name}</p>
                                 <ul class="list-disc pl-4 text-slate-600 space-y-1 font-semibold">
                                     <li><strong>${record.card1Name}:</strong> ${record.explanation1}</li>
                                     <li><strong>${record.card2Name}:</strong> ${record.explanation2}</li>
@@ -1686,7 +1742,7 @@
             const payload = {
                 playerName: window.gameMode === 'versus' ? `${window.p1Name} & ${window.p2Name}` : window.p1Name,
                 gameMode: window.gameMode === 'versus' ? 'แข่งกัน 2 คน (Versus)' : 'เล่นคนเดียว (Solo)',
-                score: window.gameMode === 'versus' ? `P1: ${window.p1Score} | P2: ${window.p2Score}` : `${window.p1Score} / 14`,
+                score: window.gameMode === 'versus' ? `P1: ${window.p1Score} | P2: ${window.p2Score}` : `${window.p1Score} / 4`,
                 bombs: window.gameMode === 'versus' ? `P1: ${window.p1Bombs} | P2: ${window.p2Bombs}` : `${window.p1Bombs} ครั้ง`,
                 time: finalTime,
                 journal: window.matchJournal
@@ -1722,7 +1778,7 @@
                 journalText += `ผลคำวินิจฉัย: ${winMsg}\n`;
             }
             
-            journalText += `ภารกิจจับคู่รวมสำเร็จ: 14 / 14 คู่สมบูรณ์\n`;
+            journalText += `ภารกิจจับคู่รวมสำเร็จ: 4 / 4 คู่สมบูรณ์\n`;
             journalText += `=======================================\n\n`;
 
             window.matchJournal.forEach((record, index) => {
@@ -1744,7 +1800,7 @@
 
             try {
                 document.execCommand("copy");
-                showToast("คัดลอกประวัติสรุปข้อมูลเรียบร้อยแล้ว! 📋💚", '📋');
+                showToast("คัดลอกประวัติสรุปข้อมูลเรียบร้อยแล้ว! 📋💖", '📋');
             } catch (err) {
                 showToast("ไม่สามารถคัดลอกข้อความอัตโนมัติได้", '❌');
             }
@@ -1794,6 +1850,7 @@
             isBoardLocked = false;
             matchJournal = [];
             pendingMatchData = null;
+            stopBGM(); // Reset any background music playing
 
             safeAddClass('end-screen', 'hidden');
             safeAddClass('reflection-modal', 'hidden');
@@ -1837,9 +1894,12 @@
             return array;
         }
 
-        // Initialize board default
+        // Initialize board default and enable background music state on first user click
         document.addEventListener("DOMContentLoaded", () => {
             setOfflineMode('solo');
+            
+            // Set music default active
+            window.musicEnabled = true; 
         });
     </script>
 </body>
