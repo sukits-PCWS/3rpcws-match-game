@@ -105,11 +105,14 @@
 </head>
 <body class="bg-gradient-to-br from-rose-100 via-purple-100 to-amber-100 min-h-full text-slate-800 flex flex-col relative overflow-x-hidden select-none">
 
+    <!-- Interactive HTML5 3D Floating Bubbles Canvas -->
+    <canvas id="bg-3d-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
     <!-- Red Flash Overlay Element for Screen Shaking Danger -->
     <div id="flash-overlay" class="absolute inset-0 pointer-events-none z-50 transition-colors duration-200"></div>
 
     <!-- Top Decorative Header -->
-    <header class="bg-white/80 backdrop-blur-md border-b-4 border-pink-200 py-3 px-4 sm:px-6 sticky top-0 z-40 shadow-sm">
+    <header class="bg-white/85 backdrop-blur-md border-b-4 border-pink-200 py-3 px-4 sm:px-6 sticky top-0 z-40 shadow-sm relative animate-fade-in">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             <div class="flex items-center gap-3 cursor-pointer" onclick="restartToHome()">
                 <div class="bg-gradient-to-tr from-pink-500 to-rose-400 text-white p-2.5 rounded-2xl shadow-lg shadow-pink-500/20 animate-bounce">
@@ -120,7 +123,7 @@
                         <span>3R จับคู่กู้สิ่งแวดล้อม</span>
                         <span class="text-[9px] font-black bg-yellow-400 text-amber-950 px-2.5 py-0.5 rounded-full uppercase tracking-wide shadow-sm">ฉบับมือถือสดใส 📱</span>
                     </h1>
-                    <p class="text-xs font-bold text-purple-700">บอร์ดการ์ดไซส์ใหญ่สว่างตา หลบระเบิดขยะ และดาวน์โหลดบันทึกคำตอบส่งคุณครูย้อนหลัง!</p>
+                    <p class="text-xs sm:text-sm font-bold text-purple-700">บอร์ดการ์ดไซส์ใหญ่สว่างตา หลบระเบิดขยะ และดาวน์โหลดบันทึกคำตอบส่งคุณครูย้อนหลัง!</p>
                 </div>
             </div>
             
@@ -143,7 +146,7 @@
                 <div id="versus-stats" class="hidden flex items-center gap-2 px-1">
                     <!-- Player 1 Score badge -->
                     <div id="p1-badge" class="bg-white border-2 border-pink-100 rounded-xl px-2.5 py-1 transition-all duration-300">
-                        <div class="text-[8px] font-black text-pink-600 flex items-center gap-0.5">
+                        <div class="text-[9px] font-black text-pink-600 flex items-center gap-0.5">
                             <i class="fa-solid fa-circle text-[6px] animate-pulse"></i> P1 (ชมพู)
                         </div>
                         <div class="text-xs font-extrabold text-slate-700 truncate max-w-[70px]" id="p1-display-name">ผู้เล่น 1</div>
@@ -154,7 +157,7 @@
 
                     <!-- Player 2 Score badge -->
                     <div id="p2-badge" class="bg-white border-2 border-blue-100 rounded-xl px-2.5 py-1 transition-all duration-300">
-                        <div class="text-[8px] font-black text-blue-600 flex items-center gap-0.5">
+                        <div class="text-[9px] font-black text-blue-600 flex items-center gap-0.5">
                             <i class="fa-solid fa-circle text-[6px] animate-pulse"></i> P2 (ฟ้า)
                         </div>
                         <div class="text-xs font-extrabold text-slate-700 truncate max-w-[70px]" id="p2-display-name">ผู้เล่น 2</div>
@@ -178,7 +181,7 @@
     </header>
 
     <!-- Start Setup Screen (Beautiful, High-Contrast & Comprehensive Choice) -->
-    <div id="start-screen" class="my-auto max-w-4xl w-full mx-auto p-4 sm:p-6 transition-all duration-300 z-30">
+    <div id="start-screen" class="my-auto max-w-4xl w-full mx-auto p-4 sm:p-6 transition-all duration-300 z-30 relative animate-fade-in">
         
         <!-- Big Hero Branding banner -->
         <div class="text-center mb-6">
@@ -186,13 +189,13 @@
                 <span>3R จับคู่กู้สิ่งแวดล้อม</span>
                 <i class="fa-solid fa-gamepad text-pink-500 animate-bounce"></i>
             </h2>
-            <p class="text-slate-700 text-sm sm:text-base font-extrabold">เกมเปิดแผ่นป้ายลดมลพิษฉบับการ์ดขนาดใหญ่พิเศษ เล่นลื่น สดใส น่ารัก และเสถียรสุดๆ 🌍✨</p>
+            <p class="text-slate-700 text-sm sm:text-base font-extrabold">เกมเปิดแผ่นป้ายลดมลพิษฉบับการ์ดขนาดใหญ่พิเศษ เล่นลื่น สดใส น่ารัก และเสถียรสุด ๆ 🌍✨</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch border-slate-100">
             
             <!-- Left Side Card: Student Play Portal -->
-            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-pink-400 shadow-xl flex flex-col justify-between space-y-6">
+            <div class="bg-white/95 rounded-3xl p-5 sm:p-6 border-4 border-pink-400 shadow-xl flex flex-col justify-between space-y-6">
                 <div>
                     <div class="flex items-center gap-2 mb-3">
                         <span class="bg-pink-500 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">สำหรับนักเรียน</span>
@@ -201,7 +204,7 @@
                             <span>ลุยภารกิจรักษ์โลก 3R</span>
                         </h3>
                     </div>
-                    <p class="text-xs text-slate-600 font-semibold leading-relaxed mb-4">
+                    <p class="text-xs sm:text-sm text-slate-600 font-bold leading-relaxed mb-4">
                         เกมจับคู่จับกลุ่มคัดแยกขยะ 10 ใบ ขนาดพอดีจิ้มง่ายบนจอมือถือ คุณครูสามารถให้นักเรียนเล่นแบบคนเดียว หรือแบ่งกลุ่ม 2 คนแข่งสลับตากันขีดเขียนอภิปรายตอบคำถามได้เลยครับ
                     </p>
 
@@ -220,14 +223,14 @@
                     <!-- Name fields -->
                     <div class="p-4 bg-purple-50/50 border-2 border-purple-100 rounded-2xl space-y-3">
                         <div>
-                            <label class="block text-[10px] font-bold text-purple-950 mb-1" id="p1-offline-label">ชื่อผู้เล่น</label>
+                            <label class="block text-xs font-bold text-purple-950 mb-1" id="p1-offline-label">ชื่อผู้เล่น</label>
                             <input type="text" id="p1-offline-input" placeholder="ระบุชื่อผู้เล่น..." value="ผู้เล่น 1"
-                                   class="w-full bg-white border border-purple-200 rounded-xl py-2 px-3 text-purple-950 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-pink-500">
+                                   class="w-full bg-white border border-purple-200 rounded-xl py-2.5 px-3 text-purple-950 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-pink-500">
                         </div>
                         <div id="p2-offline-field" class="hidden">
-                            <label class="block text-[10px] font-bold text-purple-950 mb-1">ชื่อผู้เล่นคนที่ 2</label>
+                            <label class="block text-xs font-bold text-purple-950 mb-1">ชื่อผู้เล่นคนที่ 2</label>
                             <input type="text" id="p2-offline-input" placeholder="ระบุชื่อผู้เล่นคนที่ 2..." value="ผู้เล่น 2"
-                                   class="w-full bg-white border border-purple-200 rounded-xl py-2 px-3 text-purple-950 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-pink-500">
+                                   class="w-full bg-white border border-purple-200 rounded-xl py-2.5 px-3 text-purple-950 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-pink-500">
                         </div>
                     </div>
                 </div>
@@ -239,7 +242,7 @@
             </div>
 
             <!-- Right Side Card: Teacher Dashboard Portal -->
-            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-indigo-400 shadow-xl flex flex-col justify-between space-y-6">
+            <div class="bg-white/95 rounded-3xl p-5 sm:p-6 border-4 border-indigo-400 shadow-xl flex flex-col justify-between space-y-6">
                 <div>
                     <div class="flex items-center gap-2 mb-3">
                         <span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">สำหรับคุณครู</span>
@@ -248,8 +251,8 @@
                             <span>โหมดคุณครู (ตรวจแต้มย้อนหลัง)</span>
                         </h3>
                     </div>
-                    <p class="text-xs text-slate-600 font-semibold leading-relaxed mb-4">
-                        คุณครูสามารถประเมินผลคะแนน และตรวจสอบประวัติบทวิเคราะห์คำอธิบายการประยุกต์ใช้ 3R ย้อนหลังของนักเรียนได้ง่ายๆ โดยการนำไฟล์คำตอบ (ไฟล์ .json) ที่นักเรียนส่งมาอัปโหลดขึ้นตรวจดูบนเครื่องของคุณครูได้ทันทีครับ
+                    <p class="text-xs sm:text-sm text-slate-600 font-bold leading-relaxed mb-4">
+                        คุณครูสามารถประเมินผลคะแนน และตรวจสอบประวัติบทวิเคราะห์คำอธิบายการประยุกต์ใช้ 3R ย้อนหลังของนักเรียนได้ง่าย ๆ โดยการนำไฟล์คำตอบ (ไฟล์ .json) ที่นักเรียนส่งมาอัปโหลดขึ้นตรวจดูบนเครื่องของคุณครูได้ทันทีครับ
                     </p>
 
                     <div class="p-4 bg-indigo-50 border border-indigo-150 rounded-2xl space-y-3 text-center shadow-inner">
@@ -264,15 +267,20 @@
                 </button>
             </div>
         </div>
+
+        <!-- Prepared By Teacher Credit Footer -->
+        <div class="text-center mt-8 text-xs sm:text-sm font-black text-purple-950/80 bg-white/75 backdrop-blur-sm px-4 py-2 rounded-full w-fit mx-auto border-2 border-pink-200/50 shadow-sm relative">
+            <i class="fa-solid fa-heart text-pink-500 animate-pulse"></i> จัดทำโดย ครูสุกฤษฏิ์ สิงห์กา
+        </div>
     </div>
 
     <!-- Teacher Dashboard Monitor Screen Overlay (Splendid Offline Portal) -->
-    <div id="teacher-monitor-screen" class="hidden max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6 flex-grow flex flex-col">
+    <div id="teacher-monitor-screen" class="hidden max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6 flex-grow flex flex-col relative z-20">
         
         <!-- Teacher Header Panel -->
         <div class="bg-gradient-to-r from-purple-800 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 shadow-xl border-4 border-indigo-400 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="space-y-1">
-                <div class="text-[10px] font-black tracking-widest text-indigo-300 uppercase">3R Classroom Teacher Offline Board</div>
+                <div class="text-[10px] font-black tracking-widest text-indigo-400 uppercase">3R Classroom Teacher Offline Board</div>
                 <h3 class="text-2xl font-black flex items-center gap-2">
                     <span>ระบบตรวจสอบผลสัมฤทธิ์ทางการเรียนรู้ (โหมดคุณครู) 🏫</span>
                 </h3>
@@ -292,7 +300,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch flex-grow">
             <!-- Left Grid: Student Leaderboard (7 Columns) -->
-            <div class="lg:col-span-7 bg-white rounded-3xl border border-slate-200 shadow-lg p-5 flex flex-col">
+            <div class="lg:col-span-7 bg-white/95 rounded-3xl border border-slate-200 shadow-lg p-5 flex flex-col">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
                     <h4 class="font-black text-slate-900 text-base flex items-center gap-2">
                         <i class="fa-solid fa-table-list text-purple-600"></i>
@@ -310,7 +318,7 @@
             </div>
 
             <!-- Right Grid: Live Feed Explanations (5 Columns) -->
-            <div class="lg:col-span-5 bg-white rounded-3xl border border-slate-200 shadow-lg p-5 flex flex-col">
+            <div class="lg:col-span-5 bg-white/95 rounded-3xl border border-slate-200 shadow-lg p-5 flex flex-col">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
                     <h4 class="font-black text-slate-900 text-base flex items-center gap-2">
                         <i class="fa-solid fa-comment-dots text-indigo-500"></i>
@@ -337,13 +345,19 @@
         </div>
     </div>
 
+    <!-- Active Turn Toast Indicator (Versus Mode) -->
+    <div id="turn-toast" class="fixed top-24 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm font-black px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300 z-30">
+        <span id="turn-toast-emoji">🔄</span>
+        <span id="turn-toast-message">สลับตาผู้เล่น!</span>
+    </div>
+
     <!-- Main Game Board Workspace -->
-    <main id="game-workspace" class="hidden flex-grow max-w-7xl w-full mx-auto p-4 flex flex-col lg:flex-row gap-6">
+    <main id="game-workspace" class="hidden flex-grow max-w-7xl w-full mx-auto p-4 flex flex-col lg:flex-row gap-6 relative z-10">
         
         <!-- Game Board Container -->
         <div class="flex-grow flex flex-col justify-center">
             <!-- Active Player Banner in Versus Mode -->
-            <div id="versus-turn-banner" class="hidden text-center mb-4 p-3 bg-white/95 rounded-2xl border-2 border-pink-200 transition-all duration-300 shadow">
+            <div id="versus-turn-banner" class="hidden text-center mb-4 p-3 bg-white/95 rounded-2xl border-2 border-pink-200 transition-all duration-300 shadow animate-fade-in">
                 <span class="text-[10px] uppercase font-black tracking-widest text-purple-400 block">ผู้ที่ต้องเปิดการ์ด</span>
                 <span id="active-player-name" class="text-lg font-black text-pink-600 animate-pulse">ผู้เล่น 1 (สีชมพู)</span>
             </div>
@@ -358,25 +372,25 @@
         </div>
 
         <!-- Right Side Panel: Quick Eco Guide & Live Journal -->
-        <aside class="w-full lg:w-80 flex flex-col gap-4 shrink-0">
+        <aside class="w-full lg:w-80 flex flex-col gap-4 shrink-0 relative z-10">
             <!-- Educational Guide Card -->
             <div class="bg-white/95 rounded-3xl p-5 border border-purple-100 shadow-sm">
                 <h3 class="text-md font-extrabold text-purple-800 mb-3 flex items-center gap-1.5">
                     <i class="fa-solid fa-circle-nodes"></i>
                     <span>คู่มือถอดรหัสรักษ์โลก 3R</span>
                 </h3>
-                <div class="space-y-3 text-xs">
+                <div class="space-y-3 text-xs sm:text-sm font-bold">
                     <div class="p-2.5 bg-blue-50/80 border border-blue-200/50 rounded-xl">
                         <strong class="text-blue-700 block mb-0.5">🔵 REDUCE (ลดการใช้)</strong>
-                        <p class="text-slate-600 font-semibold">ลดการสร้างขยะตั้งแต่แรกเริ่ม หลีกเลี่ยงหีบห่อ และสิ่งของฟุ่มเฟือย</p>
+                        <p class="text-slate-600">ลดการสร้างขยะตั้งแต่แรกเริ่ม หลีกเลี่ยงหีบห่อ และสิ่งของฟุ่มเฟือย</p>
                     </div>
                     <div class="p-2.5 bg-amber-50/80 border border-amber-200/50 rounded-xl">
                         <strong class="text-amber-700 block mb-0.5">🟡 REUSE (ใช้ซ้ำ)</strong>
-                        <p class="text-slate-600 font-semibold">นำกลับมาหมุนเวียนใช้ประโยชน์ซ้ำจนกว่าจะหมดสภาพ ยืดอายุผลิตภัณฑ์</p>
+                        <p class="text-slate-600">นำกลับมาหมุนเวียนใช้ประโยชน์ซ้ำจนกว่าจะหมดสภาพ ยืดอายุผลิตภัณฑ์</p>
                     </div>
                     <div class="p-2.5 bg-rose-50/80 border border-rose-200/50 rounded-xl">
                         <strong class="text-rose-700 block mb-0.5">🔴 RECYCLE (แปรรูปนำกลับมาใช้)</strong>
-                        <p class="text-slate-600 font-semibold">คัดแยกและส่งแปรรูปหลอมขึ้นรูปใหม่ เพื่อสร้างมูลค่าขยะให้กลับเป็นสินค้า</p>
+                        <p class="text-slate-600">คัดแยกและส่งแปรรูปหลอมขึ้นรูปใหม่ เพื่อสร้างมูลค่าขยะให้กลับเป็นสินค้า</p>
                     </div>
                 </div>
             </div>
@@ -430,7 +444,7 @@
                 <p class="text-slate-700 text-sm font-semibold">
                     <i class="fa-solid fa-user-check text-pink-500"></i> สิทธิ์ในการตอบข้อความของ: <span id="modal-active-player" class="font-black text-pink-600 text-base">ผู้เล่น 1</span>
                 </p>
-                <p class="text-slate-600 text-xs">การ์ดคู่นี้อยู่ในแนวคิดเดียวกันคือ <span class="font-bold text-purple-600" id="modal-category-text">REUSE</span> ! ให้นักเรียนระบุแนวทางการประยุกต์ใช้สิ่งของทั้งสองชิ้นลงในช่องข้างล่างครับ:</p>
+                <p class="text-slate-600 text-xs sm:text-sm font-bold">การ์ดคู่นี้อยู่ในแนวคิดเดียวกันคือ <span class="font-bold text-purple-600" id="modal-category-text">REUSE</span> ! ให้นักเรียนระบุแนวทางการประยุกต์ใช้สิ่งของทั้งสองชิ้นลงในช่องข้างล่างครับ:</p>
                 
                 <!-- Cards side by side preview -->
                 <div class="grid grid-cols-2 gap-4">
@@ -438,20 +452,20 @@
                     <div class="bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center relative overflow-hidden">
                         <span class="text-[10px] uppercase font-black text-slate-500 mb-1" id="modal-card1-top-type">REDUCE</span>
                         <div id="modal-card1-emoji" class="text-5xl my-2">🧾</div>
-                        <div id="modal-card1-name" class="font-extrabold text-slate-800 text-sm">ใบเสร็จอิเล็กทรอนิกส์</div>
+                        <div id="modal-card1-name" class="font-extrabold text-slate-800 text-sm sm:text-base">ใบเสร็จอิเล็กทรอนิกส์</div>
                     </div>
                     <!-- Right Card Concept -->
                     <div class="bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center relative overflow-hidden">
                         <span class="text-[10px] uppercase font-black text-slate-500 mb-1" id="modal-card2-top-type">REUSE</span>
                         <div id="modal-card2-emoji" class="text-5xl my-2">📚</div>
-                        <div id="modal-card2-name" class="font-extrabold text-slate-800 text-sm">หนังสือเก่า</div>
+                        <div id="modal-card2-name" class="font-extrabold text-slate-800 text-sm sm:text-base">หนังสือเก่า</div>
                     </div>
                 </div>
 
                 <!-- Input Forms for explanation -->
                 <div class="space-y-4 pt-2">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1">
+                        <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5 flex items-center gap-1">
                             <span id="modal-card1-label-emoji">🧾</span>
                             <span>แนวคิดสำหรับ: <span class="text-slate-900 font-black" id="modal-card1-label-name">ใบเสร็จอิเล็กทรอนิกส์</span></span>
                         </label>
@@ -459,12 +473,12 @@
                                   rows="2" class="w-full border-2 border-purple-200 rounded-xl p-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm bg-slate-50 font-semibold"></textarea>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1">
+                        <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5 flex items-center gap-1">
                             <span id="modal-card2-label-emoji">📚</span>
                             <span>แนวคิดสำหรับ: <span class="text-slate-900 font-black" id="modal-card2-label-name">หนังสือเก่า</span></span>
                         </label>
                         <textarea id="explanation-input-2" placeholder="พิมพ์วิธีการประยุกต์ใช้เพื่อการรักษ์โลกที่นี่..." 
-                                  rows="2" class="w-full border-2 border-purple-200 rounded-xl p-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm bg-slate-50 font-semibold"></textarea>
+                                  rows="2" class="w-full border-2 border-purple-200 rounded-xl p-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm bg-slate-50 font-semibold"></textarea>
                     </div>
                 </div>
 
@@ -517,7 +531,7 @@
 
     <!-- Game End / Victory Overlay Screen -->
     <div id="end-screen" class="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border-4 border-pink-400 text-center relative overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border-4 border-emerald-400 text-center relative overflow-hidden flex flex-col max-h-[90vh]">
             
             <div class="overflow-y-auto space-y-6 pr-1">
                 <!-- Trophy Graphic -->
@@ -537,9 +551,9 @@
 
                 <!-- Summarized Explanations for copy -->
                 <div class="text-left space-y-3">
-                    <h3 class="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center justify-between">
+                    <h3 class="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-700 flex items-center justify-between">
                         <span>ข้อมูลสรุปบันทึกการเรียนรู้</span>
-                        <button onclick="downloadStudentJSON()" class="text-[10px] text-pink-700 bg-pink-50 border border-pink-200 px-2.5 py-1.5 rounded-lg hover:bg-pink-100 transition flex items-center gap-1 font-bold">
+                        <button onclick="downloadStudentJSON()" class="text-[10px] text-pink-700 bg-pink-50 border border-pink-200 px-2.5 py-1.5 rounded-lg hover:bg-indigo-100 transition flex items-center gap-1 font-bold">
                             <i class="fa-solid fa-file-arrow-down"></i> ดาวน์โหลดไฟล์ส่งครู (.json)
                         </button>
                     </h3>
@@ -550,15 +564,20 @@
                 </div>
             </div>
 
+            <!-- Prepared By Teacher Credit on End Screen -->
+            <div class="text-center mt-4 text-xs font-black text-purple-950/80 bg-purple-50 py-1.5 px-3 rounded-full w-fit mx-auto border border-pink-100 shadow-sm">
+                <i class="fa-solid fa-heart text-pink-500 animate-pulse"></i> จัดทำโดย ครูสุกฤษฏิ์ สิงห์กา
+            </div>
+
             <!-- Action buttons -->
-            <div class="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-slate-100">
+            <div class="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-slate-100">
                 <button onclick="restartToHome()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-black py-3.5 rounded-2xl transition flex items-center justify-center gap-2 text-sm">
                     <i class="fa-solid fa-arrow-rotate-left"></i>
                     <span>กลับสู่หน้าแรก</span>
                 </button>
-                <button onclick="copyJournalToClipboard();" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-black py-3.5 rounded-2xl shadow-lg shadow-pink-600/20 transition flex items-center justify-center gap-2 text-sm">
+                <button onclick="copyJournalToClipboard();" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-black py-3.5 rounded-lg shadow-lg shadow-pink-600/20 transition flex items-center justify-center gap-2 text-sm">
                     <i class="fa-solid fa-copy"></i>
-                    <span>คัดลอกคำตอบพิมพ์ส่งคุณครู</span>
+                    <span>คัดลอกคำตอบส่งครู</span>
                 </button>
             </div>
         </div>
@@ -572,71 +591,8 @@
 
     <!-- Gameplay Scripts -->
     <script>
-        // --- GLOBAL GAME STATE VARIABLES ---
-        window.isBoardLocked = false;
-        window.cards = [];
-        window.flippedCards = [];
-        window.matchJournal = [];
-        window.pendingMatchData = null;
-        window.gameMode = 'solo'; // 'solo' or 'versus'
-        window.activePlayer = 1; // 1 or 2
-        window.p1Name = "ผู้เล่น 1";
-        window.p2Name = "ผู้เล่น 2";
-        window.p1Score = 0;
-        window.p2Score = 0;
-        window.p1Bombs = 0;
-        window.p2Bombs = 0;
-        window.secondsPassed = 0;
-        window.timerInterval = null;
-        window.lastClickTime = 0;
-        window.importedStudentsData = []; // Offline Teacher in-memory store
-        window.lockTimestamp = null;
+        // --- 1. DEFINE FUNCTIONS AND HELPER UTILITIES AT ABSOLUTE TOP OF SCRIPT ---
         
-        // Background Music Synthesizer State
-        window.musicEnabled = false;
-        window.audioInterval = null;
-
-        // Balanced 10 Cards Pool (8 Play Cards + 2 Bomb Cards) optimized for Mobile Screen Real Estate
-        window.rawCardPool = [
-            // REDUCE (ลดการใช้ - 4 ใบ / 2 คู่)
-            { id: 1, type: "reduce", emoji: "🧺", name: "ตะกร้าจ่ายตลาด" },
-            { id: 2, type: "reduce", emoji: "🥤", name: "แก้วน้ำส่วนตัว" },
-            { id: 3, type: "reduce", emoji: "🍱", name: "ปิ่นโต" },
-            { id: 4, type: "reduce", emoji: "🛍️", name: "ถุงผ้า" },
-
-            // REUSE (ใช้ซ้ำ - 2 ใบ / 1 คู่)
-            { id: 5, type: "reuse", emoji: "🫙", name: "ขวดแก้ว" },
-            { id: 6, type: "reuse", emoji: "📦", name: "กล่องพัสดุ" },
-
-            // RECYCLE (แปรรูปเพื่อนำกลับมาใช้ - 2 ใบ / 1 คู่)
-            { id: 7, type: "recycle", emoji: "🥛", name: "กล่องนม" },
-            { id: 8, type: "recycle", emoji: "🍳", name: "น้ำมันพืชใช้แล้ว" },
-
-            // BOMB CARDS (ระเบิดมลพิษหักแต้ม - 2 ใบ)
-            { id: 9, type: "bomb", emoji: "💣", name: "ระเบิดขยะมลพิษ" },
-            { id: 10, type: "bomb", emoji: "💥", name: "ระเบิดโลกร้อน" }
-        ];
-
-        // Backup mapping for global scope variables (fixing ReferenceError in various contexts)
-        var rawCardPool = window.rawCardPool;
-        var isBoardLocked = false;
-        var cards = [];
-        var flippedCards = [];
-        var matchJournal = [];
-        var pendingMatchData = null;
-        var gameMode = 'solo';
-        var activePlayer = 1;
-        var p1Name = "ผู้เล่น 1";
-        var p2Name = "ผู้เล่น 2";
-        var p1Score = 0;
-        var p2Score = 0;
-        var p1Bombs = 0;
-        var p2Bombs = 0;
-        var secondsPassed = 0;
-        var timerInterval = null;
-        var lastClickTime = 0;
-        var importedStudentsData = [];
-
         // Robust DOM helper selectors to safeguard against null reference crashes
         function safeSetText(id, text) {
             const el = document.getElementById(id);
@@ -658,10 +614,252 @@
             if (el) el.classList.remove(className);
         }
 
-        // Sound Engine Initializer
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // Helper function to fetch card style/metadata (Playful Candy/Zepquiz design)
+        function getCategoryMeta(type) {
+            switch(type) {
+                case 'reduce': 
+                    return {
+                        outerBorder: 'border-pink-300 shadow-lg shadow-pink-100/50',
+                        textClass: 'text-pink-600',
+                        headerTitle: 'Reduce',
+                        ribbonBg: 'bg-gradient-to-b from-pink-400 to-rose-500',
+                        ribbonBorder: 'border-pink-500',
+                        ribbonIcon: 'fa-solid fa-arrow-down',
+                        badgeBg: 'bg-pink-500 text-white',
+                        badgeIcon: 'fa-solid fa-minus'
+                    };
+                case 'reuse': 
+                    return {
+                        outerBorder: 'border-yellow-300 shadow-lg shadow-yellow-100/50',
+                        textClass: 'text-yellow-600',
+                        headerTitle: 'Reuse',
+                        ribbonBg: 'bg-gradient-to-b from-yellow-400 to-amber-500',
+                        ribbonBorder: 'border-yellow-500',
+                        ribbonIcon: 'fa-solid fa-arrows-spin',
+                        badgeBg: 'bg-yellow-500 text-white',
+                        badgeIcon: 'fa-solid fa-arrows-left-right'
+                    };
+                case 'recycle': 
+                    return {
+                        outerBorder: 'border-purple-300 shadow-lg shadow-purple-100/50',
+                        textClass: 'text-purple-600',
+                        headerTitle: 'Recycle',
+                        ribbonBg: 'bg-gradient-to-b from-purple-400 to-indigo-500',
+                        ribbonBorder: 'border-purple-500',
+                        ribbonIcon: 'fa-solid fa-recycle',
+                        badgeBg: 'bg-purple-600 text-white',
+                        badgeIcon: 'fa-solid fa-hand-holding-heart'
+                    };
+                case 'bomb':
+                    return {
+                        outerBorder: 'border-red-400 shadow-lg shadow-red-100/50 bg-red-50',
+                        textClass: 'text-red-600 animate-pulse font-black',
+                        headerTitle: '⚠️ ภัยขยะ ⚠️',
+                        ribbonBg: 'bg-gradient-to-b from-red-500 to-rose-600',
+                        ribbonBorder: 'border-red-600',
+                        ribbonIcon: 'fa-solid fa-bomb',
+                        badgeBg: 'bg-red-500 text-white',
+                        badgeIcon: 'fa-solid fa-triangle-exclamation'
+                    };
+            }
+        }
 
+        // Standardized badge class function to prevent function mismatch crash
+        function getCategoryBadgeClass(type) {
+            switch(type) {
+                case 'reduce': return 'bg-pink-100 text-pink-800 border-pink-300';
+                case 'reuse': return 'bg-yellow-100 text-yellow-800 border-yellow-300';
+                case 'recycle': return 'bg-purple-100 text-purple-800 border-purple-300';
+                default: return 'bg-slate-100 text-slate-800 border-slate-300';
+            }
+        }
+
+        function getCatBadgeClass(type) {
+            return getCategoryBadgeClass(type);
+        }
+
+        function getCatNameThai(type) {
+            switch(type) {
+                case 'reduce': return 'Reduce (ลดการใช้)';
+                case 'reuse': return 'Reuse (ใช้ซ้ำ)';
+                case 'recycle': return 'Recycle (แปรรูปนำกลับมาใช้)';
+                default: return 'สิ่งแวดล้อม';
+            }
+        }
+
+        function getPlaceholderText(type, name) {
+            switch(type) {
+                case 'reduce': return `อธิบายว่า [${name}] สามารถลดทอนปริมาณทรัพยากร/พลังงานได้อย่างไรบ้าง...`;
+                case 'reuse': return `อธิบายว่า [${name}] สามารถนำไปต่อยอดใช้ประโยชน์ซ้ำๆ ในชีวิตจริงได้อย่างไรบ้าง...`;
+                case 'recycle': return `อธิบายว่า [${name}] จะคัดแยกประเภทและนำส่งหลอมแปรรูปกลับมาเป็นสิ่งใดได้บ้าง...`;
+                default: return 'ระบุแนวคิดการปกป้องสิ่งแวดล้อม...';
+            }
+        }
+
+        function getCatTextClass(type) {
+            switch(type) {
+                case 'reduce': return 'text-pink-600';
+                case 'reuse': return 'text-yellow-600';
+                case 'recycle': return 'text-purple-600';
+                default: return 'text-slate-700';
+            }
+        }
+
+        // Helper to shuffle list
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Timer functions
+        function startTimer() {
+            window.secondsPassed = 0;
+            secondsPassed = 0;
+            updateTimerDisplay();
+            clearInterval(window.timerInterval);
+            if (window.timerInterval) {
+                clearInterval(window.timerInterval);
+            }
+            window.timerInterval = setInterval(() => {
+                window.secondsPassed++;
+                secondsPassed++;
+                updateTimerDisplay();
+            }, 1000);
+            timerInterval = window.timerInterval;
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(window.secondsPassed / 60);
+            const seconds = window.secondsPassed % 60;
+            const text = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            safeSetText('live-timer', text);
+        }
+
+        // --- 2. BIND HELPER FUNCTIONS EXPLICITLY TO GLOBAL WINDOW OBJECT FOR PREVENTING SCOPING/REFERENCE ERRORS ---
+        window.getCategoryMeta = getCategoryMeta;
+        window.getCategoryBadgeClass = getCategoryBadgeClass;
+        window.getCatBadgeClass = getCatBadgeClass;
+        window.getCatNameThai = getCatNameThai;
+        window.getPlaceholderText = getPlaceholderText;
+        window.getCatTextClass = getCatTextClass;
+        window.safeSetText = safeSetText;
+        window.safeSetHTML = safeSetHTML;
+        window.safeAddClass = safeAddClass;
+        window.safeRemoveClass = safeRemoveClass;
+        window.shuffle = shuffle;
+        window.startTimer = startTimer;
+        window.updateTimerDisplay = updateTimerDisplay;
+
+        // Safely declare playSound so it is always present as a function immediately (fixing TypeError)
         window.playSound = function(type) {
+            console.log("Sound engine warming up... action registered:", type);
+        };
+
+        // --- 3. STATE DECLARATIONS ---
+        window.isBoardLocked = false;
+        window.cards = [];
+        window.flippedCards = [];
+        window.matchJournal = [];
+        window.pendingMatchData = null;
+        window.gameMode = 'solo'; // 'solo' or 'versus'
+        window.activePlayer = 1; // 1 or 2
+        window.p1Name = "ผู้เล่น 1";
+        window.p2Name = "ผู้เล่น 2";
+        window.p1Score = 0;
+        window.p2Score = 0;
+        window.p1Bombs = 0;
+        window.p2Bombs = 0;
+        window.secondsPassed = 0;
+        window.timerInterval = null;
+        window.lastClickTime = 0;
+        window.importedStudentsData = []; // Offline Teacher in-memory store
+        window.lockTimestamp = null;
+        window.musicEnabled = false;
+        window.audioInterval = null;
+
+        // Local variable references mirrored
+        var isBoardLocked = false;
+        var cards = [];
+        var flippedCards = [];
+        var matchJournal = [];
+        var pendingMatchData = null;
+        var gameMode = 'solo';
+        var activePlayer = 1;
+        var p1Name = "ผู้เล่น 1";
+        var p2Name = "ผู้เล่น 2";
+        var p1Score = 0;
+        var p2Score = 0;
+        var p1Bombs = 0;
+        var p2Bombs = 0;
+        var secondsPassed = 0;
+        var timerInterval = null;
+        var lastClickTime = 0;
+        var importedStudentsData = [];
+
+        // Balanced 10 Cards Pool (8 Play Cards + 2 Bomb Cards) optimized for Mobile Screen Real Estate
+        // Corrected spelling of "แกนกระดาษทิชชู" based on Royal Thai Dictionary (no '่' on ชู)
+        window.rawCardPool = [
+            // REDUCE (ลดการใช้ - 4 ใบ / 2 คู่)
+            { id: 1, type: "reduce", emoji: "🧺", name: "ตะกร้าจ่ายตลาด" },
+            { id: 2, type: "reduce", emoji: "🥤", name: "แก้วน้ำส่วนตัว" },
+            { id: 3, type: "reduce", emoji: "🍱", name: "ปิ่นโต" },
+            { id: 4, type: "reduce", emoji: "🛍️", name: "ถุงผ้า" },
+
+            // REUSE (ใช้ซ้ำ - 2 ใบ / 1 คู่)
+            { id: 5, type: "reuse", emoji: "🫙", name: "ขวดแก้ว" },
+            { id: 6, type: "reuse", emoji: "📦", name: "กล่องพัสดุ" },
+
+            // RECYCLE (แปรรูปเพื่อนำกลับมาใช้ - 2 ใบ / 1 คู่)
+            { id: 7, type: "recycle", emoji: "🥛", name: "กล่องนม" },
+            { id: 8, type: "recycle", emoji: "🍳", name: "น้ำมันพืชใช้แล้ว" },
+
+            // BOMB CARDS (ระเบิดมลพิษหักแต้ม - 2 ใบ)
+            { id: 9, type: "bomb", emoji: "💣", name: "ระเบิดขยะมลพิษ" },
+            { id: 10, type: "bomb", emoji: "💥", name: "ระเบิดโลกร้อน" }
+        ];
+        var rawCardPool = window.rawCardPool;
+
+        // Offline mode setup switcher (Must be globally accessible from HTML clicks)
+        window.setOfflineMode = function(mode) {
+            window.gameMode = mode;
+            gameMode = mode;
+            const btnSolo = document.getElementById('btn-mode-solo');
+            const btnVersus = document.getElementById('btn-mode-versus');
+            const p2Field = document.getElementById('p2-offline-field');
+            const p1Label = document.getElementById('p1-offline-label');
+
+            window.playSound('flip');
+
+            if (mode === 'solo') {
+                if (btnSolo) btnSolo.className = "py-3 px-3 rounded-2xl border-4 border-pink-500 bg-pink-50 text-pink-950 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform scale-105";
+                if (btnVersus) btnVersus.className = "py-3 px-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-700 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform opacity-70";
+                if (p2Field) p2Field.classList.add('hidden');
+                if (p1Label) p1Label.innerText = "ชื่อผู้เล่น";
+            } else {
+                if (btnSolo) btnSolo.className = "py-3 px-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-700 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform opacity-70";
+                if (btnVersus) btnVersus.className = "py-3 px-3 rounded-2xl border-4 border-pink-500 bg-pink-50 text-pink-950 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform scale-105";
+                if (p2Field) p2Field.classList.remove('hidden');
+                if (p1Label) p1Label.innerText = "ชื่อผู้เล่นคนที่ 1";
+            }
+        };
+
+        // --- 4. WEB AUDIO ENGINE INITIALIZATION ---
+        var audioCtx = null;
+        try {
+            var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioContextClass) {
+                audioCtx = new AudioContextClass();
+            }
+        } catch (e) {
+            console.warn("Web Audio API is not supported in this environment:", e);
+        }
+
+        // Real sound playing implementation
+        window.playSound = function(type) {
+            if (!audioCtx) return;
             try {
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
@@ -680,7 +878,6 @@
                     osc.start();
                     osc.stop(audioCtx.currentTime + 0.15);
                 } else if (type === 'match') {
-                    // Ascending joyful arpeggio
                     osc.type = 'sine';
                     const notes = [329.63, 392.00, 523.25, 659.25]; // E4, G4, C5, E5 (Major)
                     notes.forEach((freq, i) => {
@@ -745,13 +942,140 @@
                     });
                 }
             } catch (err) {
-                console.log("Audio contextual block bypassed.");
+                console.log("Audio play failed inside window.playSound:", err);
             }
         };
 
-        // LOOPING BGM SYNTHESIS (Candy Crush Style Pentatonic Happy Vibe)
+        // --- 5. 3D INTERACTIVE PASTEL BUBBLE BACKGROUND GENERATOR ---
+        let bgCanvas = null;
+        let bgCtx = null;
+        let bgWidth = window.innerWidth;
+        let bgHeight = window.innerHeight;
+        const bubbles = [];
+        const numBubbles = 25;
+        const fov = 350; // 3D Camera Field of View
+        let angleX = 0.001; // Auto-rotation rate
+        let angleY = 0.002;
+        let targetAngleX = 0.001;
+        let targetAngleY = 0.002;
+
+        const pastelColors = [
+            'rgba(244, 114, 182, 0.45)',  // Rose Pink
+            'rgba(167, 139, 250, 0.45)',  // Violet Purple
+            'rgba(96, 165, 250, 0.45)',   // Sky Blue
+            'rgba(251, 191, 36, 0.45)',   // Amber Gold
+            'rgba(248, 113, 113, 0.45)'    // Soft Red
+        ];
+
+        // Safe background initializer called after DOMContentLoaded (Foolproof prevention)
+        function init3DBackground() {
+            bgCanvas = document.getElementById('bg-3d-canvas');
+            if (!bgCanvas) return; // Exit gracefully if canvas is missing in some environments
+            
+            bgCtx = bgCanvas.getContext('2d');
+            bgWidth = bgCanvas.width = window.innerWidth;
+            bgHeight = bgCanvas.height = window.innerHeight;
+
+            for (let i = 0; i < numBubbles; i++) {
+                bubbles.push({
+                    x: (Math.random() - 0.5) * window.innerWidth * 0.8,
+                    y: (Math.random() - 0.5) * window.innerHeight * 0.8,
+                    z: (Math.random() - 0.5) * 600,
+                    r: Math.random() * 25 + 15,
+                    color: pastelColors[Math.floor(Math.random() * pastelColors.length)]
+                });
+            }
+
+            // Bind listeners safely
+            window.addEventListener('resize', () => {
+                if (bgCanvas) {
+                    bgWidth = bgCanvas.width = window.innerWidth;
+                    bgHeight = bgCanvas.height = window.innerHeight;
+                }
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                targetAngleY = (e.clientX - bgWidth / 2) * 0.00003;
+                targetAngleX = (e.clientY - bgHeight / 2) * 0.00003;
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) {
+                    targetAngleY = (e.touches[0].clientX - bgWidth / 2) * 0.00004;
+                    targetAngleX = (e.touches[0].clientY - bgHeight / 2) * 0.00004;
+                }
+            });
+
+            render3DBackground();
+        }
+
+        function render3DBackground() {
+            if (!bgCanvas || !bgCtx) return;
+            bgCtx.clearRect(0, 0, bgWidth, bgHeight);
+
+            // Interpolate spin speeds smoothly (prevent sudden lag or jump)
+            angleX += (targetAngleX - angleX) * 0.1;
+            angleY += (targetAngleY - angleY) * 0.1;
+
+            const cosX = Math.cos(angleX);
+            const sinX = Math.sin(angleX);
+            const cosY = Math.cos(angleY);
+            const sinY = Math.sin(angleY);
+
+            bubbles.forEach(b => {
+                // 3D rotation calculations on X and Y axes
+                let y1 = b.y * cosX - b.z * sinX;
+                let z1 = b.z * cosX + b.y * sinX;
+                let x2 = b.x * cosY - z1 * sinY;
+                let z2 = z1 * cosY + b.x * sinY;
+
+                // Update real positions slowly to loop continuous rotation
+                b.x = x2;
+                b.y = y1;
+                b.z = z2;
+
+                // Perspective projection onto 2D screen coordinate
+                const scale = fov / (fov + b.z);
+                const screenX = x2 * scale + bgWidth / 2;
+                const screenY = y1 * scale + bgHeight / 2;
+                const projectedRadius = b.r * scale;
+
+                // Draw floating sphere (Only render if on screen)
+                if (screenX + projectedRadius > 0 && screenX - projectedRadius < bgWidth &&
+                    screenY + projectedRadius > 0 && screenY - projectedRadius < bgHeight) {
+                    
+                    bgCtx.beginPath();
+                    
+                    // Create soft 3D radial gradient glow
+                    const grad = bgCtx.createRadialGradient(
+                        screenX - projectedRadius * 0.3, 
+                        screenY - projectedRadius * 0.3, 
+                        projectedRadius * 0.1, 
+                        screenX, 
+                        screenY, 
+                        projectedRadius
+                    );
+                    grad.addColorStop(0, 'rgba(255, 255, 255, 0.85)');
+                    grad.addColorStop(0.3, b.color);
+                    grad.addColorStop(1, 'rgba(255, 255, 255, 0.05)');
+
+                    bgCtx.fillStyle = grad;
+                    bgCtx.arc(screenX, screenY, projectedRadius, 0, Math.PI * 2);
+                    bgCtx.fill();
+                    
+                    // Soft white glass-like highlight ring
+                    bgCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+                    bgCtx.lineWidth = 1;
+                    bgCtx.stroke();
+                }
+            });
+
+            requestAnimationFrame(render3DBackground);
+        }
+
+        // LOOPING BGM SYNTHESIS (Candy Crush Style Pentatonic Happy Vibe - Faster/More Exciting)
         window.toggleMusic = function() {
-            if (audioCtx.state === 'suspended') {
+            if (audioCtx && audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
 
@@ -759,9 +1083,9 @@
             const btn = document.getElementById('btn-music-toggle');
 
             if (window.musicEnabled) {
-                if (btn) btn.innerHTML = '<i class="fa-solid fa-volume-high animate-pulse"></i>';
+                if (btn) btn.innerHTML = '<i class="fa-solid fa-volume-high animate-pulse text-pink-500"></i>';
                 startBGM();
-                showToast("เปิดเสียงเพลงประกอบรื่นเริงแล้วครับ 🎵", '🎵');
+                showToast("เปิดเสียงเพลงประกอบเร้าจังหวะแสนสนุกแล้วครับ! 🎵", '🎵');
             } else {
                 if (btn) btn.innerHTML = '<i class="fa-solid fa-music"></i>';
                 stopBGM();
@@ -770,19 +1094,26 @@
         };
 
         function startBGM() {
+            if (!audioCtx) return;
             stopBGM(); // Reset previous loops if any
             
-            // Plucky Candy crush pentatonic progression melody
+            // Highly exciting rhythmic sequence (Pentatonic and fast tempo)
+            // Added Bass rhythm nodes simulation to sound punchy!
             const melody = [
-                523.25, 587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33, // C5, D5, E5, G5, A5, G5, E5, D5
-                659.25, 783.99, 880.00, 1046.50, 880.00, 783.99, 659.25, 523.25  // E5, G5, A5, C6, A5, G5, E5, C5
+                523.25, 659.25, 587.33, 783.99, 880.00, 783.99, 1046.50, 880.00, // C5, E5, D5, G5, A5, G5, C6, A5
+                783.99, 659.25, 587.33, 523.25, 587.33, 659.25, 783.99, 1046.50  // G5, E5, D5, C5, D5, E5, G5, C6
+            ];
+            const bass = [
+                130.81, 164.81, 146.83, 196.00, 220.00, 196.00, 261.63, 220.00
             ];
             let noteIdx = 0;
+            let bassIdx = 0;
 
             window.audioInterval = setInterval(() => {
-                if (!window.musicEnabled) return;
+                if (!window.musicEnabled || !audioCtx) return;
 
                 try {
+                    // 1. Synth Pluck Node (Melody)
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     const filter = audioCtx.createBiquadFilter();
@@ -791,23 +1122,44 @@
                     filter.connect(gain);
                     gain.connect(audioCtx.destination);
 
-                    osc.type = 'triangle'; // Smooth bubble-like sound
+                    osc.type = 'triangle'; // Happy soft pluck
                     osc.frequency.setValueAtTime(melody[noteIdx], audioCtx.currentTime);
                     
                     filter.type = 'lowpass';
-                    filter.frequency.setValueAtTime(1000, audioCtx.currentTime); // Sweet plucky cutoff
+                    filter.frequency.setValueAtTime(1200, audioCtx.currentTime);
 
-                    gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.35);
+                    gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.28);
 
                     osc.start();
-                    osc.stop(audioCtx.currentTime + 0.4);
+                    osc.stop(audioCtx.currentTime + 0.3);
+
+                    // 2. Playful Bass Kick Synthesis (Every second beat)
+                    if (noteIdx % 2 === 0) {
+                        const bassOsc = audioCtx.createOscillator();
+                        const bassGain = audioCtx.createGain();
+                        
+                        bassOsc.connect(bassGain);
+                        bassGain.connect(audioCtx.destination);
+                        
+                        bassOsc.type = 'sine'; // Deep plop bass
+                        bassOsc.frequency.setValueAtTime(bass[bassIdx], audioCtx.currentTime);
+                        bassOsc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.15); // Dynamic sweep!
+                        
+                        bassGain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                        bassGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+                        
+                        bassOsc.start();
+                        bassOsc.stop(audioCtx.currentTime + 0.16);
+                        
+                        bassIdx = (bassIdx + 1) % bass.length;
+                    }
 
                     noteIdx = (noteIdx + 1) % melody.length;
                 } catch (e) {
                     console.log("Audio synthesis schedule skip.");
                 }
-            }, 350); // Bouncy tempo
+            }, 260); // Fast, exciting, bouncy 130 BPM tempo
         }
 
         function stopBGM() {
@@ -817,79 +1169,7 @@
             }
         }
 
-        // Helper function to fetch card style/metadata (Playful Candy/Zepquiz design)
-        function getCategoryMeta(type) {
-            switch(type) {
-                case 'reduce': 
-                    return {
-                        outerBorder: 'border-pink-300 shadow-lg shadow-pink-100/50',
-                        textClass: 'text-pink-600',
-                        headerTitle: 'Reduce',
-                        ribbonBg: 'bg-gradient-to-b from-pink-400 to-rose-500',
-                        ribbonBorder: 'border-pink-500',
-                        ribbonIcon: 'fa-solid fa-arrow-down',
-                        badgeBg: 'bg-pink-500 text-white',
-                        badgeIcon: 'fa-solid fa-minus'
-                    };
-                case 'reuse': 
-                    return {
-                        outerBorder: 'border-yellow-300 shadow-lg shadow-yellow-100/50',
-                        textClass: 'text-yellow-600',
-                        headerTitle: 'Reuse',
-                        ribbonBg: 'bg-gradient-to-b from-yellow-400 to-amber-500',
-                        ribbonBorder: 'border-yellow-500',
-                        ribbonIcon: 'fa-solid fa-arrows-spin',
-                        badgeBg: 'bg-yellow-500 text-white',
-                        badgeIcon: 'fa-solid fa-arrows-left-right'
-                    };
-                case 'recycle': 
-                    return {
-                        outerBorder: 'border-purple-300 shadow-lg shadow-purple-100/50',
-                        textClass: 'text-purple-600',
-                        headerTitle: 'Recycle',
-                        ribbonBg: 'bg-gradient-to-b from-purple-400 to-indigo-500',
-                        ribbonBorder: 'border-purple-500',
-                        ribbonIcon: 'fa-solid fa-recycle',
-                        badgeBg: 'bg-purple-600 text-white',
-                        badgeIcon: 'fa-solid fa-hand-holding-heart'
-                    };
-                case 'bomb':
-                    return {
-                        outerBorder: 'border-red-400 shadow-lg shadow-red-100/50 bg-red-50',
-                        textClass: 'text-red-600 animate-pulse font-black',
-                        headerTitle: '⚠️ ภัยขยะ ⚠️',
-                        ribbonBg: 'bg-gradient-to-b from-red-500 to-rose-600',
-                        ribbonBorder: 'border-red-600',
-                        ribbonIcon: 'fa-solid fa-bomb',
-                        badgeBg: 'bg-red-500 text-white',
-                        badgeIcon: 'fa-solid fa-triangle-exclamation'
-                    };
-            }
-        }
-
-        // Offline mode setup switcher
-        window.setOfflineMode = function(mode) {
-            window.gameMode = mode;
-            gameMode = mode;
-            const btnSolo = document.getElementById('btn-mode-solo');
-            const btnVersus = document.getElementById('btn-mode-versus');
-            const p2Field = document.getElementById('p2-offline-field');
-            const p1Label = document.getElementById('p1-offline-label');
-
-            window.playSound('flip');
-
-            if (mode === 'solo') {
-                if (btnSolo) btnSolo.className = "py-3 px-3 rounded-2xl border-4 border-pink-500 bg-pink-50 text-pink-950 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform scale-105";
-                if (btnVersus) btnVersus.className = "py-3 px-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-700 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform opacity-70";
-                if (p2Field) p2Field.classList.add('hidden');
-                if (p1Label) p1Label.innerText = "ชื่อผู้เล่น";
-            } else {
-                if (btnSolo) btnSolo.className = "py-3 px-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-700 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform opacity-70";
-                if (btnVersus) btnVersus.className = "py-3 px-3 rounded-2xl border-4 border-pink-500 bg-pink-50 text-pink-950 font-black text-xs shadow-sm transition-all flex flex-col items-center justify-center gap-1 transform scale-105";
-                if (p2Field) p2Field.classList.remove('hidden');
-                if (p1Label) p1Label.innerText = "ชื่อผู้เล่นคนที่ 1";
-            }
-        };
+        // --- 6. CORE GAMEPLAY CONTROLLER FLOWS ---
 
         // START OFFLINE GAMEPLAY
         window.startOfflineGame = function() {
@@ -1113,27 +1393,6 @@
             `;
         };
 
-        // Core visual triggers for Timer
-        function startTimer() {
-            window.secondsPassed = 0;
-            secondsPassed = 0;
-            updateTimerDisplay();
-            clearInterval(timerInterval);
-            window.timerInterval = setInterval(() => {
-                window.secondsPassed++;
-                secondsPassed++;
-                updateTimerDisplay();
-            }, 1000);
-            timerInterval = window.timerInterval;
-        }
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(window.secondsPassed / 60);
-            const seconds = window.secondsPassed % 60;
-            const text = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            safeSetText('live-timer', text);
-        }
-
         // Gameplay setup
         function initGameBoard() {
             const board = document.getElementById('game-board');
@@ -1147,7 +1406,6 @@
 
             window.cards.forEach((card, index) => {
                 const cardEl = document.createElement('div');
-                // Extremely mobile responsive card sizes
                 cardEl.className = 'aspect-[3/4.2] perspective-1000 relative cursor-pointer group active:scale-95 transition-transform w-full select-none';
                 cardEl.style.touchAction = 'manipulation';
                 cardEl.id = `card-${index}`;
@@ -1163,9 +1421,9 @@
                             <div class="absolute inset-1.5 border-2 border-dashed border-white/40 rounded-2xl pointer-events-none"></div>
                             
                             <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/20 flex flex-col items-center justify-center border-4 border-white/50 shadow-inner">
-                                <span class="text-3xl sm:text-4xl font-black tracking-wider text-yellow-300 drop-shadow-md">3R</span>
+                                <span class="text-3xl sm:text-4xl font-black tracking-wider text-yellow-300 drop-shadow-md font-sans">3R</span>
                             </div>
-                            <div class="mt-2 text-[10px] sm:text-xs text-white uppercase tracking-widest font-black font-sans">คู่กู้โลก</div>
+                            <div class="mt-2 text-[11px] sm:text-sm font-black text-white uppercase tracking-widest">คู่กู้โลก</div>
                         </div>
 
                         <!-- CARD FRONT: Expanded large graphics layout -->
@@ -1199,7 +1457,7 @@
                             <!-- Right Solid Accent Ribbon -->
                             <div class="${theme.ribbonBg} w-[18px] sm:w-[22px] h-full flex flex-col items-center justify-between py-2 rounded-r-2xl relative text-white border-l ${theme.ribbonBorder}">
                                 <div class="w-3.5 h-3.5 rounded-full bg-white/20 border border-white/30 flex items-center justify-center">
-                                    <i class="${theme.ribbonIcon} text-[8px]"></i>
+                                    <i class="${theme.ribbonIcon} text-[7px]"></i>
                                 </div>
                                 <div class="vertical-text text-[8px] sm:text-[9px] font-black tracking-widest uppercase opacity-95 my-auto transform rotate-180">
                                     ${card.type}
@@ -1475,47 +1733,6 @@
             
             safeAddClass('modal-warning', 'hidden');
             safeRemoveClass('reflection-modal', 'hidden');
-        }
-
-        function getCatTextClass(type) {
-            switch(type) {
-                case 'reduce': return 'text-pink-600';
-                case 'reuse': return 'text-yellow-600';
-                case 'recycle': return 'text-purple-600';
-                default: return 'text-slate-700';
-            }
-        }
-
-        // Standardized badge class function to prevent function mismatch crash
-        function getCategoryBadgeClass(type) {
-            switch(type) {
-                case 'reduce': return 'bg-pink-100 text-pink-800 border-pink-300';
-                case 'reuse': return 'bg-yellow-100 text-yellow-800 border-yellow-300';
-                case 'recycle': return 'bg-purple-100 text-purple-800 border-purple-300';
-                default: return 'bg-slate-100 text-slate-800 border-slate-300';
-            }
-        }
-
-        function getCatBadgeClass(type) {
-            return getCategoryBadgeClass(type);
-        }
-
-        function getCatNameThai(type) {
-            switch(type) {
-                case 'reduce': return 'Reduce (ลดการใช้)';
-                case 'reuse': return 'Reuse (ใช้ซ้ำ)';
-                case 'recycle': return 'Recycle (แปรรูปนำกลับมาใช้)';
-                default: return 'สิ่งแวดล้อม';
-            }
-        }
-
-        function getPlaceholderText(type, name) {
-            switch(type) {
-                case 'reduce': return `อธิบายว่า [${name}] สามารถลดทอนปริมาณทรัพยากร/พลังงานได้อย่างไรบ้าง...`;
-                case 'reuse': return `อธิบายว่า [${name}] สามารถนำไปต่อยอดใช้ประโยชน์ซ้ำๆ ในชีวิตจริงได้อย่างไรบ้าง...`;
-                case 'recycle': return `อธิบายว่า [${name}] จะคัดแยกประเภทและนำส่งหลอมแปรรูปกลับมาเป็นสิ่งใดได้บ้าง...`;
-                default: return 'ระบุแนวคิดการปกป้องสิ่งแวดล้อม...';
-            }
         }
 
         window.submitExplanation = async () => {
@@ -1800,7 +2017,7 @@
 
             try {
                 document.execCommand("copy");
-                showToast("คัดลอกประวัติสรุปข้อมูลเรียบร้อยแล้ว! 📋💖", '📋');
+                showToast("คัดลอกประวัติสรุปข้อมูลเรียบร้อยแล้ว! 📋💚", '📋');
             } catch (err) {
                 showToast("ไม่สามารถคัดลอกข้อความอัตโนมัติได้", '❌');
             }
@@ -1862,41 +2079,16 @@
             updateJournalUI();
         };
 
-        // SAFETY WATCHDOG LOOP (Prevents freeze if click calculations desync)
-        setInterval(() => {
-            const modalEl = document.getElementById('reflection-modal');
-            const startEl = document.getElementById('start-screen');
-            const endEl = document.getElementById('end-screen');
-
-            const modalVisible = modalEl ? !modalEl.classList.contains('hidden') : false;
-            const startVisible = startEl ? !startEl.classList.contains('hidden') : false;
-            const endVisible = endEl ? !endEl.classList.contains('hidden') : false;
-
-            // If board lock persists longer than 3.5 seconds with no modal, hard unlock
-            if (window.isBoardLocked && !modalVisible && !startVisible && !endVisible) {
-                console.warn("Safety Watchdog Guard triggered: Unlocked stuck board.");
-                window.isBoardLocked = false;
-                isBoardLocked = false;
-                window.flippedCards = [];
-                flippedCards = [];
-                window.lockTimestamp = null;
-            } else {
-                window.lockTimestamp = null;
-            }
-        }, 1000);
-
-        // Helper to shuffle list
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
         // Initialize board default and enable background music state on first user click
         document.addEventListener("DOMContentLoaded", () => {
-            setOfflineMode('solo');
+            // Safely initialize the 3D canvas background only after DOM is fully parsed
+            init3DBackground();
+
+            if (typeof window.setOfflineMode === 'function') {
+                window.setOfflineMode('solo');
+            } else if (typeof setOfflineMode === 'function') {
+                setOfflineMode('solo');
+            }
             
             // Set music default active
             window.musicEnabled = true; 
